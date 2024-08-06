@@ -1,40 +1,32 @@
-package com.rehabilitationpro.screen.login
+package com.rehabilitationpro.screens.menus.attendance
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.rehabilitationpro.navigation.Screen
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
-    // Basic login screen layout
+fun AttendanceScreen(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Welcome to RehabPRO")
-        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = "Attendance Screen", style = MaterialTheme.typography.bodyLarge)
         Button(
-            onClick = {
-                // On successful login, navigate to the main menu
-                navController.navigate("main") {
-                    // Pop up to the login destination and remove it from back stack
-                    popUpTo("login") { inclusive = true }
-                }
-            },
+            onClick = { navController.navigate(Screen.MainMenu.route) },
             modifier = Modifier.padding(8.dp)
         ) {
-            Text(text = "Login")
+            Text(text = "Back to Main")
         }
     }
 }
