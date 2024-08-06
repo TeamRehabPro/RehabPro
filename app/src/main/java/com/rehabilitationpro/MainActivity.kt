@@ -8,8 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.rehabilitationpro.navigation.Screen
 import com.rehabilitationpro.screens.MainMenu
+import com.rehabilitationpro.screens.account.AccountCreationScreen
 import com.rehabilitationpro.screens.menus.attendance.AttendanceScreen
 import com.rehabilitationpro.screens.menus.dashboard.DashboardScreen
 import com.rehabilitationpro.screens.login.LoginScreen
@@ -42,5 +42,6 @@ fun AppNavHost(navController: NavHostController) {
         composable(Screen.Schedule.route) { ScheduleScreen(navController) }
         composable(Screen.Dashboard.route) { DashboardScreen(navController) }
         composable(Screen.Messenger.route) { MessengerScreen(navController) }
+        composable(Screen.AccountCreation.route) { AccountCreationScreen(navController) }
     }
 }
