@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RehabPROTheme {
+                Text("this is Rehab PRO")
             }
         }
     }
