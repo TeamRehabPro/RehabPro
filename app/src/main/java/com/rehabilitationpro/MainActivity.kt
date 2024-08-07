@@ -1,25 +1,26 @@
+// MainActivity.kt
 package com.rehabilitationpro
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.rehabilitationpro.screen.login.LoginScreen
-import com.rehabilitationpro.screen.notice.NoticeScreen
-import com.rehabilitationpro.screen.schedule.ScheduleScreen
+import androidx.navigation.navArgument
+import com.rehabilitationpro.screens.MainMenu
+import com.rehabilitationpro.screens.authentication.AccountCreationScreen
+import com.rehabilitationpro.screens.authentication.LoginScreen
+import com.rehabilitationpro.screens.menus.attendance.AttendanceScreen
+import com.rehabilitationpro.screens.menus.dashboard.DashboardScreen
+import com.rehabilitationpro.screens.menus.messenger.MessengerScreen
+import com.rehabilitationpro.screens.menus.notice.NoticeDetailScreen
+import com.rehabilitationpro.screens.menus.notice.NoticeMainScreen
+import com.rehabilitationpro.screens.menus.notice.notices
+import com.rehabilitationpro.screens.menus.reservation.ReservationScreen
+import com.rehabilitationpro.screens.menus.schedule.ScheduleScreen
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,33 +37,42 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "login") {
-        composable("login") { LoginScreen(navController) }
+    NavHost(navController = navController, startDestination = Screen.AuthScreen.Login.route) {
+        // Authentication-related screens
+        composable(Screen.AuthScreen.Login.route) { LoginScreen(navController) }
+        composable(Screen.AuthScreen.AccountCreation.route) { AccountCreationScreen(navController) }
 
-        composable("main") { MainMenu(navController) }
-        composable("notice") { NoticeScreen(navController) }
-        composable("schedule") { ScheduleScreen(navController) }
-    }
-}
+        // Main menu and general screens
+        composable(Screen.MainMenu.route) { MainMenu(navController) }
 
-@Composable
-fun MainMenu(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Button(
-            onClick = { navController.navigate("notice") },
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Text(text = "Go to Notice")
+        // Use Notice sealed class for notice screens
+        composable(Screen.NoticeScreen.Main.route) { NoticeMainScreen(navController) }
+        composable(
+            route = Screen.NoticeScreen.Detail.route,
+            arguments = listOf(
+                navArgument("id") { type = androidx.navigation.NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id") ?: "No ID"
+
+            // Find the notice with the given ID
+            val notice = notices.find { it.id == id }
+
+            // Pass arguments to NoticeDetailScreen
+            notice?.let {
+                NoticeDetailScreen(
+                    navController = navController,
+                    title = notice.title,
+                    timestamp = notice.timestamp,
+                    description = notice.description
+                )
+            }
         }
-        Button(
-            onClick = { navController.navigate("schedule") },
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Text(text = "Go to Schedule")
-        }
+
+        composable(Screen.MenuScreen.Attendance.route) { AttendanceScreen(navController) }
+        composable(Screen.MenuScreen.Reservation.route) { ReservationScreen(navController) }
+        composable(Screen.MenuScreen.Schedule.route) { ScheduleScreen(navController) }
+        composable(Screen.MenuScreen.Dashboard.route) { DashboardScreen(navController) }
+        composable(Screen.MenuScreen.Messenger.route) { MessengerScreen(navController) }
     }
 }
