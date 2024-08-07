@@ -1,4 +1,4 @@
-package com.rehabilitationpro.screens.login
+package com.rehabilitationpro.screens.authentication
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
