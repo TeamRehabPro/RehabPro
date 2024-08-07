@@ -1,13 +1,32 @@
 package com.rehabilitationpro
 
+// Base sealed class for all screens
 sealed class Screen(val route: String) {
-    data object Login : Screen("login")
+    // Authentication-related screens
+    sealed class AuthScreen(route: String) : Screen(route) {
+        data object Login : AuthScreen("login")
+        data object AccountCreation : AuthScreen("account")
+    }
+
+    // Main menu and general screens
     data object MainMenu : Screen("menu")
-    data object Notice : Screen("notice")
-    data object Attendance : Screen("attendance")
-    data object Reservation : Screen("reservation")
-    data object Schedule : Screen("schedule")
-    data object Dashboard : Screen("dashboard")
-    data object Messenger : Screen("messenger")
-    data object AccountCreation : Screen("account")
+
+    // Notice screens as a part of the Screen hierarchy
+    sealed class NoticeScreen(route: String) : Screen(route) {
+        data object Main : NoticeScreen("notice")
+        data object Detail : NoticeScreen("notice_detail/{id}") {
+            fun createRoute(id: String): String {
+                return "notice_detail/$id"
+            }
+        }
+    }
+
+    // Subcategory for menu screens
+    sealed class MenuScreen(route: String) : Screen(route) {
+        data object Attendance : MenuScreen("attendance")
+        data object Reservation : MenuScreen("reservation")
+        data object Schedule : MenuScreen("schedule")
+        data object Dashboard : MenuScreen("dashboard")
+        data object Messenger : MenuScreen("messenger")
+    }
 }
