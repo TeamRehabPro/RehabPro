@@ -66,7 +66,7 @@ fun NoticeMainScreen(navController: NavHostController) {
             items(notices) { notice ->
                 NoticeCard(notice) {
                     navController.navigate(
-                        Screen.NoticeScreen.Detail.createRoute(notice.id) // Updated to use Notice.DetailScreen
+                        Screen.NoticeScreen.Detail.createRoute(notice.id) // Updated to use Notice DetailScreen
                     )
                 }
             }

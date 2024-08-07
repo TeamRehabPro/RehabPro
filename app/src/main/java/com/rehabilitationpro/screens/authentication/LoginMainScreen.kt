@@ -1,6 +1,12 @@
-package com.rehabilitationpro.screens.login
+package com.rehabilitationpro.screens.authentication
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -62,7 +68,7 @@ fun LoginScreen(navController: NavHostController) {
             onClick = {
                 // Navigate to MainMenu screen
                 navController.navigate(Screen.MainMenu.route) {
-                    popUpTo(Screen.Login.route) { inclusive = true }
+                    popUpTo(Screen.AuthScreen.Login.route) { inclusive = true }
                 }
             },
             modifier = Modifier.padding(8.dp)
@@ -74,7 +80,7 @@ fun LoginScreen(navController: NavHostController) {
         Button(
             onClick = {
                 // Navigate to AccountCreationScreen
-                navController.navigate(Screen.AccountCreation.route)
+                navController.navigate(Screen.AuthScreen.AccountCreation.route)
             },
             modifier = Modifier.padding(8.dp)
         ) {
