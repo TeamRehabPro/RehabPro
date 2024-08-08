@@ -1,10 +1,11 @@
+// ScreenState.kt
 package com.rehabilitationpro
 
 sealed class Screen(val route: String) {
     // 1 : Authentication Screen
     sealed class AuthScreen(route: String) : Screen(route) {
         data object Login : AuthScreen("login")
-        data object AccountCreation : AuthScreen("account")
+        data object SignUp : AuthScreen("signup")
     }
 
     // 2 : Main menu
