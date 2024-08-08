@@ -1,4 +1,3 @@
-// QRScannerScreen.kt
 package com.rehabilitationpro.screens.menus.attendance
 
 import android.Manifest
