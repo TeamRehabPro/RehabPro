@@ -11,25 +11,25 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 data class ColorPalette(
-    val Gray50: Color = Color(0xFFF8FAFC),
-    val Gray100: Color = Color(0xFFF1F5F9),
-    val Gray200: Color = Color(0xFFE2E8F0),
-    val Gray300: Color = Color(0xFFCBD5E1),
-    val Gray400: Color = Color(0xFF94A3B8),
-    val Gray500: Color = Color(0xFF64748B),
-    val Gray600: Color = Color(0xFF475569),
-    val Gray700: Color = Color(0xFF334155),
-    val Gray800: Color = Color(0xFF1E293B),
-    val Gray900: Color = Color(0xFF0F172A),
+    val myGray50: Color = Color(0xFFF8FAFC),
+    val myGray100: Color = Color(0xFFF1F5F9),
+    val myGray200: Color = Color(0xFFE2E8F0),
+    val myGray300: Color = Color(0xFFCBD5E1),
+    val myGray400: Color = Color(0xFF94A3B8),
+    val myGray500: Color = Color(0xFF64748B),
+    val myGray600: Color = Color(0xFF475569),
+    val myGray700: Color = Color(0xFF334155),
+    val myGray800: Color = Color(0xFF1E293B),
+    val myGray900: Color = Color(0xFF0F172A),
 
-    val Gray: Color = Color(0xFFBBBBBB),
-    val White: Color = Color(0xFFFFFFFF),
-    val Purple: Color = Color(0xFF692BE0),
-    val Mint: Color = Color(0xFF5FD4C5),
-    val SkyBlue: Color = Color(0xFF6380E5),
-    val Blue: Color = Color(0xFF403BBD),
-    val DarkBlue: Color = Color(0xFF160E6F),
-    val Black: Color = Color(0xFF000000)
+    val myGray: Color = Color(0xFFBBBBBB),
+    val myWhite: Color = Color(0xFFFFFFFF),
+    val myPurple: Color = Color(0xFF692BE0),
+    val myMint: Color = Color(0xFF5FD4C5),
+    val mySkyBlue: Color = Color(0xFF6380E5),
+    val myBlue: Color = Color(0xFF403BBD),
+    val myDarkBlue: Color = Color(0xFF160E6F),
+    val myBlack: Color = Color(0xFF000000)
 )
 
 //// Usage example
