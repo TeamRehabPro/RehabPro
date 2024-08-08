@@ -1,9 +1,11 @@
 // MainActivity.kt
 package com.rehabilitationpro
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -12,18 +14,20 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.rehabilitationpro.screens.MainMenu
 import com.rehabilitationpro.screens.authentication.AccountCreationScreen
-import com.rehabilitationpro.screens.authentication.LoginScreen
-import com.rehabilitationpro.screens.menus.attendance.AttendanceScreen
-import com.rehabilitationpro.screens.menus.dashboard.DashboardScreen
-import com.rehabilitationpro.screens.menus.messenger.MessengerScreen
+import com.rehabilitationpro.screens.login.LoginScreen
+import com.rehabilitationpro.screens.menus.attendance.AttendanceMainScreen
+import com.rehabilitationpro.screens.menus.attendance.QRScannerScreen
+import com.rehabilitationpro.screens.menus.dashboard.DashboardMainScreen
+import com.rehabilitationpro.screens.menus.messenger.MessengerMainScreen
 import com.rehabilitationpro.screens.menus.notice.NoticeDetailScreen
 import com.rehabilitationpro.screens.menus.notice.NoticeMainScreen
 import com.rehabilitationpro.screens.menus.notice.notices
-import com.rehabilitationpro.screens.menus.reservation.ReservationScreen
-import com.rehabilitationpro.screens.menus.schedule.ScheduleScreen
+import com.rehabilitationpro.screens.menus.reservation.ReservationMainScreen
+import com.rehabilitationpro.screens.menus.schedule.ScheduleMainScreen
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -35,6 +39,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.AuthScreen.Login.route) {
@@ -69,10 +74,12 @@ fun AppNavHost(navController: NavHostController) {
             }
         }
 
-        composable(Screen.MenuScreen.Attendance.route) { AttendanceScreen(navController) }
-        composable(Screen.MenuScreen.Reservation.route) { ReservationScreen(navController) }
-        composable(Screen.MenuScreen.Schedule.route) { ScheduleScreen(navController) }
-        composable(Screen.MenuScreen.Dashboard.route) { DashboardScreen(navController) }
-        composable(Screen.MenuScreen.Messenger.route) { MessengerScreen(navController) }
+        composable(Screen.AttendanceScreen.Main.route) { AttendanceMainScreen(navController) }
+        composable(Screen.AttendanceScreen.QR.route) { QRScannerScreen(navController)}
+
+        composable(Screen.ReservationScreen.Main.route) { ReservationMainScreen(navController) }
+        composable(Screen.ScheduleScreen.Main.route) { ScheduleMainScreen(navController) }
+        composable(Screen.DashboardScreen.Main.route) { DashboardMainScreen(navController) }
+        composable(Screen.MessengerScreen.Main.route) { MessengerMainScreen(navController) }
     }
 }

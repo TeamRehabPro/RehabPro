@@ -11,11 +11,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,46 +47,55 @@ val notices = listOf(
     Notice("Notice 10", "Description for Notice 10", "2024-07-28 08:50"),
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoticeMainScreen(navController: NavHostController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Notice Screen",
-            style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(8.dp)
-        )
-
-        LazyColumn(
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Main Menu") },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.navigate(Screen.MainMenu.route)
+                    }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(top = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(notices) { notice ->
-                NoticeCard(notice) {
-                    navController.navigate(
-                        Screen.NoticeScreen.Detail.createRoute(notice.id) // Updated to use Notice DetailScreen
-                    )
+            Text(
+                text = "Notice Screen",
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.padding(8.dp)
+            )
+
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(top = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(notices) { notice ->
+                    NoticeCard(notice) {
+                        navController.navigate(
+                            Screen.NoticeScreen.Detail.createRoute(notice.id)
+                        )
+                    }
                 }
             }
         }
-
-        Button(
-            onClick = { navController.navigate(Screen.MainMenu.route) },
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Text(text = "Back to Main")
-        }
     }
 }
-
 @Composable
 fun NoticeCard(notice: com.rehabilitationpro.screens.menus.notice.Notice, onClick: () -> Unit) {
     Card(
