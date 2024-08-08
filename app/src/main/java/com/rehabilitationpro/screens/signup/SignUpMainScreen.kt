@@ -51,10 +51,10 @@ fun AccountCreationScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Attendance Management") },
+                title = { Text("Login") },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Screen.MainMenu.route)
+                        navController.navigate(Screen.AuthScreen.Login.route)
                     }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
@@ -127,7 +127,7 @@ fun AccountCreationScreen(navController: NavHostController) {
 
                     // Proceed with account creation logic
                     navController.navigate(Screen.AuthScreen.Login.route) {
-                        popUpTo(Screen.AuthScreen.AccountCreation.route) { inclusive = true }
+                        popUpTo(Screen.AuthScreen.SignUp.route) { inclusive = true }
                     }
                 }
             },
