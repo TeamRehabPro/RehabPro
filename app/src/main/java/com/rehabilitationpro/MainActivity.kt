@@ -6,14 +6,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.rehabilitationpro.sidenavigation.SideNavigation
 import com.rehabilitationpro.screens.MainMenu
-import com.rehabilitationpro.screens.signup.AccountCreationScreen
 import com.rehabilitationpro.screens.login.LoginScreen
 import com.rehabilitationpro.screens.menus.attendance.AttendanceMainScreen
 import com.rehabilitationpro.screens.menus.attendance.QRScannerScreen
@@ -24,6 +27,7 @@ import com.rehabilitationpro.screens.menus.notice.NoticeMainScreen
 import com.rehabilitationpro.screens.menus.notice.notices
 import com.rehabilitationpro.screens.menus.reservation.ReservationMainScreen
 import com.rehabilitationpro.screens.menus.schedule.ScheduleMainScreen
+import com.rehabilitationpro.screens.signup.AccountCreationScreen
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,7 +37,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             RehabPROTheme {
                 val navController = rememberNavController()
-                AppNavHost(navController = navController)
+                val drawerState = rememberDrawerState(DrawerValue.Closed)
+                AppContent(navController = navController, drawerState = drawerState)
             }
         }
     }
@@ -41,17 +46,25 @@ class MainActivity : ComponentActivity() {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AppNavHost(navController: NavHostController) {
+fun AppContent(navController: NavHostController, drawerState: DrawerState) {
+    SideNavigation(navController = navController, drawerState = drawerState) {
+        AppNavHost(navController = navController, drawerState = drawerState)
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun AppNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(navController = navController, startDestination = Screen.AuthScreen.Login.route) {
         // Authentication-related screens
         composable(Screen.AuthScreen.Login.route) { LoginScreen(navController) }
-        composable(Screen.AuthScreen.AccountCreation.route) { AccountCreationScreen(navController) }
+        composable(Screen.AuthScreen.SignUp.route) { AccountCreationScreen(navController) }
 
         // Main menu and general screens
-        composable(Screen.MainMenu.route) { MainMenu(navController) }
+        composable(Screen.MainMenu.route) { MainMenu(navController, drawerState) }
 
         // Use Notice sealed class for notice screens
-        composable(Screen.NoticeScreen.Main.route) { NoticeMainScreen(navController) }
+        composable(Screen.NoticeScreen.Main.route) { NoticeMainScreen(navController, drawerState) }
         composable(
             route = Screen.NoticeScreen.Detail.route,
             arguments = listOf(
@@ -74,12 +87,12 @@ fun AppNavHost(navController: NavHostController) {
             }
         }
 
-        composable(Screen.AttendanceScreen.Main.route) { AttendanceMainScreen(navController) }
-        composable(Screen.AttendanceScreen.QR.route) { QRScannerScreen(navController)}
+        composable(Screen.AttendanceScreen.Main.route) { AttendanceMainScreen(navController, drawerState) }
+        composable(Screen.AttendanceScreen.QR.route) { QRScannerScreen(navController) }
 
-        composable(Screen.ReservationScreen.Main.route) { ReservationMainScreen(navController) }
-        composable(Screen.ScheduleScreen.Main.route) { ScheduleMainScreen(navController) }
-        composable(Screen.DashboardScreen.Main.route) { DashboardMainScreen(navController) }
-        composable(Screen.MessengerScreen.Main.route) { MessengerMainScreen(navController) }
+        composable(Screen.ReservationScreen.Main.route) { ReservationMainScreen(navController, drawerState) }
+        composable(Screen.ScheduleScreen.Main.route) { ScheduleMainScreen(navController, drawerState) }
+        composable(Screen.DashboardScreen.Main.route) { DashboardMainScreen(navController, drawerState) }
+        composable(Screen.MessengerScreen.Main.route) { MessengerMainScreen(navController, drawerState) }
     }
 }
