@@ -38,6 +38,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true // for CameraX
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -66,5 +67,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Navigation Gradle
     implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // CameraX Gradle
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
+    implementation(libs.barcode.scanning)
 }
