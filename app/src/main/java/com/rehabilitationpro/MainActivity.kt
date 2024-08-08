@@ -13,7 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.rehabilitationpro.screens.MainMenu
-import com.rehabilitationpro.screens.authentication.AccountCreationScreen
+import com.rehabilitationpro.screens.signup.AccountCreationScreen
 import com.rehabilitationpro.screens.login.LoginScreen
 import com.rehabilitationpro.screens.menus.attendance.AttendanceMainScreen
 import com.rehabilitationpro.screens.menus.attendance.QRScannerScreen
