@@ -80,9 +80,8 @@ dependencies {
     // ktor Gradle
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
-//    implementation(libs.ktor.client.serialization)
     implementation(libs.ktor.serialization.kotlinx.json)
-//
-//    // gson Gradle
-//    implementation ("com.google.code.gson:gson:2.8.9")
+
+    // okhttp Gradle
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }
