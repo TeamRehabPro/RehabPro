@@ -2,9 +2,20 @@
 package com.rehabilitationpro.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,42 +33,29 @@ fun MainMenu(navController: NavHostController, drawerState: DrawerState) {
     Scaffold(
         topBar = { TopBar(navController, drawerState, currentRoute) },
     ) { innerPadding ->
-        Column(
+        LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(innerPadding)
+                .padding(16.dp),
+            columns = GridCells.Fixed(2),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Create a grid layout for the buttons
-            val buttons = listOf(
-                Pair("공지사항", Screen.NoticeScreen.Main.route),
-                Pair("근태", Screen.AttendanceScreen.Main.route),
-                Pair("환자예약", Screen.ReservationScreen.Main.route),
-                Pair("병원일정", Screen.ScheduleScreen.Main.route),
-                Pair("자재관리", Screen.DashboardScreen.Main.route),
-                Pair("사내메신저", Screen.MessengerScreen.Main.route)
+            val menus = listOf(
+                Screen.NoticeScreen.Main,
+                Screen.AttendanceScreen.Main,
+                Screen.ReservationScreen.Main,
+                Screen.ScheduleScreen.Main,
+                Screen.DashboardScreen.Main,
+                Screen.MessengerScreen.Main,
             )
-
-            for (row in 0 until 3) {
-                Row(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    for (col in 0 until 2) {
-                        val index = row * 2 + col
-                        if (index < buttons.size) {
-                            MenuButton(
-                                text = buttons[index].first,
-                                route = buttons[index].second,
-                                navController = navController
-                            )
-                        }
-                    }
-                }
+            items(menus) { menu ->
+                MenuButton(
+                    text = menu.title,
+                    route = menu.route,
+                    navController = navController
+                )
             }
         }
     }
