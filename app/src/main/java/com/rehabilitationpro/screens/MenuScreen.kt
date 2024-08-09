@@ -30,35 +30,35 @@ fun MainMenu(navController: NavHostController) {
         }
         // 2: 근태 확인 페이지
         Button(
-            onClick = { navController.navigate(Screen.MenuScreen.Attendance.route) },
+            onClick = { navController.navigate(Screen.AttendanceScreen.Main.route) },
             modifier = Modifier.padding(8.dp)
         ) {
             Text(text = "Go to Attendance Management")
         }
         // 3: 환자 예약 관리
         Button(
-            onClick = { navController.navigate(Screen.MenuScreen.Reservation.route) },
+            onClick = { navController.navigate(Screen.ReservationScreen.Main.route) },
             modifier = Modifier.padding(8.dp)
         ) {
             Text(text = "Go to Patient Reservation")
         }
         // 4: 병원 일정 페이지
         Button(
-            onClick = { navController.navigate(Screen.MenuScreen.Schedule.route) },
+            onClick = { navController.navigate(Screen.ScheduleScreen.Main.route) },
             modifier = Modifier.padding(8.dp)
         ) {
             Text(text = "Go to Schedule")
         }
         // 5: 병상, 장비 현황
         Button(
-            onClick = { navController.navigate(Screen.MenuScreen.Dashboard.route) },
+            onClick = { navController.navigate(Screen.DashboardScreen.Main.route) },
             modifier = Modifier.padding(8.dp)
         ) {
             Text(text = "Go to Equipment Dashboard")
         }
         // 6: 원내 메신저
         Button(
-            onClick = { navController.navigate(Screen.MenuScreen.Messenger.route) },
+            onClick = { navController.navigate(Screen.MessengerScreen.Main.route) },
             modifier = Modifier.padding(8.dp)
         ) {
             Text(text = "Go to Messenger")
