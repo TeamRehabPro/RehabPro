@@ -76,4 +76,13 @@ dependencies {
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
     implementation(libs.barcode.scanning)
+
+    // ktor Gradle
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+//    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.serialization.kotlinx.json)
+//
+//    // gson Gradle
+//    implementation ("com.google.code.gson:gson:2.8.9")
 }
