@@ -63,11 +63,10 @@ fun MainMenu(navController: NavHostController, drawerState: DrawerState) {
 
 @Composable
 fun MenuButton(text: String, route: String, navController: NavHostController) {
-    val colors = ColorPalette()
     Box(
         modifier = Modifier
             .size(150.dp)
-            .background(colors.mySkyBlue)
+            .background(ColorPalette.mySkyBlue)
             .padding(8.dp),
         contentAlignment = Alignment.Center
     ) {

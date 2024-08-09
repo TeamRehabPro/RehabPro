@@ -11,6 +11,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.rehabilitationpro.R
@@ -21,7 +22,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(navController: NavHostController, drawerState: DrawerState, currentRoute: String?) {
-    val colors = ColorPalette()
     val scope = rememberCoroutineScope()
 
     // Define the title based on the current route
@@ -38,17 +38,25 @@ fun TopBar(navController: NavHostController, drawerState: DrawerState, currentRo
 
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = colors.mySkyBlue
+            containerColor = ColorPalette.mySkyBlue
         ),
         navigationIcon = {
             IconButton(onClick = { navController.navigate(Screen.MainMenu.route) }) {
-                Icon(painter = painterResource(id = R.drawable.test_icon_0808), contentDescription = "Logo", tint = colors.myWhite)
+                Icon(
+                    painter = painterResource(id = R.drawable.test_icon_0808),
+                    contentDescription = "Logo",
+                    tint = ColorPalette.myWhite
+                )
             }
         },
-        title = { Text(text = title, color = colors.myWhite) },
+        title = { Text(text = title, color = ColorPalette.myWhite) },
         actions = {
             IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                Icon(imageVector = Icons.Default.Menu, contentDescription = "Open Drawer", tint = colors.myWhite)
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Open Drawer",
+                    tint = ColorPalette.myWhite
+                )
             }
         },
     )
