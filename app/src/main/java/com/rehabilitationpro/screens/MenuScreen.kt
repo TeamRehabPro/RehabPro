@@ -28,10 +28,8 @@ import com.rehabilitationpro.ui.theme.ColorPalette
 
 @Composable
 fun MainMenu(navController: NavHostController, drawerState: DrawerState) {
-    val currentRoute = Screen.MainMenu.route
-
     Scaffold(
-        topBar = { TopBar(navController, drawerState, currentRoute) },
+        topBar = { TopBar(navController, drawerState) },
     ) { innerPadding ->
         LazyVerticalGrid(
             modifier = Modifier

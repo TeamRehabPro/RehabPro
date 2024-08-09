@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.rehabilitationpro.Screen
 import com.rehabilitationpro.bar.TopBar
 import com.rehabilitationpro.screens.menus.attendance.component.AttendanceButton
 
@@ -40,9 +39,8 @@ fun AttendanceMainScreen(navController: NavHostController, drawerState: DrawerSt
         }
     }
 
-    val currentRoute = Screen.AttendanceScreen.Main.route
     Scaffold(
-        topBar = { TopBar(navController, drawerState, currentRoute) },
+        topBar = { TopBar(navController, drawerState) },
     ) { innerPadding ->
         Column(
             modifier = Modifier

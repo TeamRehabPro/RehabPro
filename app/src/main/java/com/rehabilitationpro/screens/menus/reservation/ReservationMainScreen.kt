@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.rehabilitationpro.Screen
 import com.rehabilitationpro.bar.TopBar
 import com.rehabilitationpro.screens.menus.reservation.component.CalendarView
 import java.time.LocalDate
@@ -33,10 +32,8 @@ fun ReservationMainScreen(navController: NavHostController, drawerState: DrawerS
     val currentMonth = remember { mutableStateOf(YearMonth.now()) }
     val isYearView = remember { mutableStateOf(false) }
 
-    val currentRoute = Screen.ReservationScreen.Main.route
-
     Scaffold(
-        topBar = { TopBar(navController, drawerState, currentRoute) },
+        topBar = { TopBar(navController, drawerState) },
     ) { paddingValues ->
         Column(
             modifier = Modifier

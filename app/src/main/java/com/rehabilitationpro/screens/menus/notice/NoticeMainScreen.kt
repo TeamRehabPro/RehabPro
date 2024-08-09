@@ -28,10 +28,8 @@ data class Notice(val title: String, val description: String, val timestamp: Str
 
 @Composable
 fun NoticeMainScreen(navController: NavHostController, drawerState: DrawerState) {
-    val currentRoute = Screen.NoticeScreen.Main.route
-
     Scaffold(
-        topBar = { TopBar(navController, drawerState, currentRoute) },
+        topBar = { TopBar(navController, drawerState) },
     ) { innerPadding ->
         Column(
             modifier = Modifier

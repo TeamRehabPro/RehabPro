@@ -11,7 +11,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.rehabilitationpro.R
@@ -21,11 +20,11 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(navController: NavHostController, drawerState: DrawerState, currentRoute: String?) {
+fun TopBar(navController: NavHostController, drawerState: DrawerState) {
     val scope = rememberCoroutineScope()
 
     // Define the title based on the current route
-    val title = when (currentRoute) {
+    val title = when (navController.currentDestination?.route) {
         Screen.MainMenu.route -> "홈 화면"
         Screen.NoticeScreen.Main.route -> "공지사항"
         Screen.AttendanceScreen.Main.route -> "근태"
