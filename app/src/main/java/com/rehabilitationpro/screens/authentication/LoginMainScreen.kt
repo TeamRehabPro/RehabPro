@@ -80,7 +80,7 @@ fun LoginScreen(navController: NavHostController) {
         Button(
             onClick = {
                 // Navigate to AccountCreationScreen
-                navController.navigate(Screen.AuthScreen.AccountCreation.route)
+                navController.navigate(Screen.AuthScreen.SignUp.route)
             },
             modifier = Modifier.padding(8.dp)
         ) {
