@@ -45,5 +45,6 @@ sealed class Screen(val route: String) {
     // 8 : Messenger screens as a part of the Screen hierarchy
     sealed class MessengerScreen(route: String) : Screen(route) {
         data object Main : MessengerScreen("messenger")
+    // Subcategory for menu screens
     }
 }
