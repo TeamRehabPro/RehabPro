@@ -1,5 +1,6 @@
 package com.rehabilitationpro.screens.signin
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -34,7 +36,8 @@ fun SignInScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(Color.White),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -44,10 +47,11 @@ fun SignInScreen(navController: NavHostController) {
 
         // [2] 로그인 용 이메일 / 비밀 번호 입력 필드
         val userEmail = remember { mutableStateOf("") }
-        val userPassword = remember { mutableStateOf("") }
-        EmailInputField(state = userEmail)
+        EmailInputField(fieldValue = userEmail)
         Spacer(modifier = Modifier.height(16.dp))
-        PasswordInputField(state = userPassword)
+
+        val userPassword = remember { mutableStateOf("") }
+        PasswordInputField(fieldValue = userPassword)
 
         // [3] 비밀 번호 찾기 버튼
         FindPasswordButton(modifier = Modifier
@@ -56,7 +60,11 @@ fun SignInScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(48.dp))
 
         // [4] 로그인 버튼
-        SignInButton(onClick = { navController.navigate(Screen.SignUp.route) })
+        val signInConditions = userEmail.value.isNotEmpty() && userPassword.value.isNotEmpty()
+        SignInButton(
+            onClick = { navController.navigate(Screen.MainMenu.route) },
+            enableConditions = signInConditions
+        )
         Spacer(modifier = Modifier.height(8.dp))
 
         // [5] 계정이 없다면 -> 회원 가입 버튼
