@@ -77,8 +77,8 @@ fun LoginScreen(navController: NavHostController) {
             Button(
                 onClick = {
                     // Navigate to MainMenu screen
-                    navController.navigate(Screen.MainMenu.route) {
-                        popUpTo(Screen.AuthScreen.Login.route) { inclusive = true }
+                    navController.navigate(Screen.SignIn.route) {
+                        popUpTo(Screen.SignIn.route) { inclusive = true }
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
