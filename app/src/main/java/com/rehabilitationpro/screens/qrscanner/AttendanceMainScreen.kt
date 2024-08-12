@@ -1,11 +1,10 @@
 // AttendanceMainScreen.kt
-package com.rehabilitationpro.screens.menus.attendance
+package com.rehabilitationpro.screens.qrscanner
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,11 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.rehabilitationpro.bar.TopBar
-import com.rehabilitationpro.screens.menus.attendance.component.AttendanceButton
+import com.rehabilitationpro.screens.qrscanner.component.AttendanceButton
 
 @Composable
-fun AttendanceMainScreen(navController: NavHostController, drawerState: DrawerState) {
+fun AttendanceMainScreen(navController: NavHostController) {
     var clockInTime by remember { mutableStateOf<String?>(null) }
     var clockOutTime by remember { mutableStateOf<String?>(null) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
@@ -39,9 +37,8 @@ fun AttendanceMainScreen(navController: NavHostController, drawerState: DrawerSt
         }
     }
 
-    Scaffold(
-        topBar = { TopBar(navController, drawerState) },
-    ) { innerPadding ->
+    Scaffold{
+        innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

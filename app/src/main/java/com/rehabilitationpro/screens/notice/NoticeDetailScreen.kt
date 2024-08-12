@@ -1,5 +1,5 @@
 // NoticeDetailScreen.kt
-package com.rehabilitationpro.screens.menus.notice
+package com.rehabilitationpro.screens.notice
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,7 +39,7 @@ fun NoticeDetailScreen(
                 navigationIcon = {
                     IconButton(onClick = {
                         // Navigate back to the Login screen
-                        navController.navigate(Screen.NoticeScreen.Main.route)
+                        navController.navigate(Screen.NoticeHome.route)
                     }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }

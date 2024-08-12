@@ -1,4 +1,4 @@
-package com.rehabilitationpro.screens.menus.attendance.component
+package com.rehabilitationpro.screens.qrscanner.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.rehabilitationpro.Screen
-import com.rehabilitationpro.screens.menus.attendance.getShiftEndTime
-import com.rehabilitationpro.screens.menus.attendance.getShiftStartTime
+import com.rehabilitationpro.screens.qrscanner.getShiftEndTime
+import com.rehabilitationpro.screens.qrscanner.getShiftStartTime
 
 @Composable
 fun AttendanceButton(
@@ -42,7 +42,7 @@ fun handleAttendanceAction(
             setErrorMessage("아직 출근시간이 아닙니다")
         } else {
             setErrorMessage(null)
-            navController.navigate(Screen.AttendanceScreen.QR.route + "?action=clockin")
+            navController.navigate(Screen.QR.route + "?action=clockin")
         }
     } else if (clockOutTime == null) { // 출근 후 퇴근하지 않은 상태
         val shiftEndTime = getShiftEndTime()
@@ -51,7 +51,7 @@ fun handleAttendanceAction(
             setErrorMessage("현재는 근무시간입니다")
         } else {
             setErrorMessage(null)
-            navController.navigate(Screen.AttendanceScreen.QR.route + "?action=clockout")
+            navController.navigate(Screen.QR.route + "?action=clockout")
         }
     }
 }
