@@ -37,7 +37,7 @@ fun SignUpScreenHeader(
     modifier: Modifier = Modifier
 ) {
     CustomScreenHeader(
-        title = "Sign Up",
+        title = "Create New Account",
         onLeftIconClick = onBackClick,
         leftIconResId = R.drawable.icon_back_arrow,
         modifier = modifier
