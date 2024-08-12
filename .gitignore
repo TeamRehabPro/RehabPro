@@ -17,3 +17,5 @@ local.properties
 .idea/vcs.xml
 .idea/inspectionProfiles/Project_Default.xml
 .idea/deploymentTargetSelector.xml
+
+/app/src/main/res/xml/network_security_config.xml

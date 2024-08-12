@@ -23,6 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.rehabilitationpro.Screen
 import com.rehabilitationpro.bar.TopBar
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import java.io.IOException
 import java.util.Calendar
 
 @Composable
@@ -33,6 +39,8 @@ fun AttendanceMainScreen(navController: NavHostController, drawerState: DrawerSt
     var currentAction by remember { mutableStateOf<String?>(null) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
+    val employeeId = "temp_001"
+
     navController.currentBackStackEntry?.savedStateHandle?.get<String>("scannedTime")?.let { time ->
         if (currentAction == "clockin") {
             clockInTime = time
@@ -41,7 +49,6 @@ fun AttendanceMainScreen(navController: NavHostController, drawerState: DrawerSt
         }
         currentAction = null
     }
-
     Scaffold(
         topBar = { TopBar(navController, drawerState, currentRoute) },
     ) { innerPadding ->
@@ -57,7 +64,7 @@ fun AttendanceMainScreen(navController: NavHostController, drawerState: DrawerSt
             if (errorMessage != null) {
                 Text(text = errorMessage!!, color = Color.Red, modifier = Modifier.padding(8.dp))
             }
-
+            MyApp()
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -86,43 +93,55 @@ fun AttendanceMainScreen(navController: NavHostController, drawerState: DrawerSt
                 }
             }
 
+            // 출근 QR 코드 스캔 버튼
             Button(
                 onClick = {
                     val currentTime = System.currentTimeMillis()
                     val shiftStartTime = getShiftStartTime()
-                    val shiftEndTime = getShiftEndTime()
 
-                    when {
-                        clockInTime == null -> {
-                            if (currentTime < shiftStartTime - 3600000) { // 1시간 전
-                                errorMessage = "아직 출근시간이 아닙니다"
-                            } else {
-                                errorMessage = null
-                                currentAction = "clockin"
-                                navController.navigate(Screen.AttendanceScreen.QR.route + "?action=clockin")
-                            }
+                    if (clockInTime == null) {
+                        if (currentTime < shiftStartTime - 3600000) { // 1시간 전
+                            errorMessage = "아직 출근시간이 아닙니다"
+                        } else {
+                            errorMessage = null
+                            currentAction = "clockin"
+                            navController.navigate(Screen.AttendanceScreen.QR.route + "?action=clockin")
                         }
-                        clockOutTime == null -> {
-                            if (currentTime < shiftEndTime) {
-                                errorMessage = "현재는 근무시간입니다"
-                            } else {
-                                errorMessage = null
-                                currentAction = "clockout"
-                                navController.navigate(Screen.AttendanceScreen.QR.route + "?action=clockout")
-                            }
-                        }
-                        else -> {
-                            errorMessage = "이미 출퇴근 기록이 있습니다"
-                        }
+                    } else {
+                        errorMessage = "이미 출근 기록이 있습니다"
                     }
                 },
                 modifier = Modifier.padding(top = 16.dp)
             ) {
-                Text(text = "QR 코드 스캔")
+                Text(text = "출근 QR 코드 스캔")
+            }
+
+            // 퇴근 QR 코드 스캔 버튼
+            Button(
+                onClick = {
+                    val currentTime = System.currentTimeMillis()
+                    val shiftEndTime = getShiftEndTime()
+
+                    if (clockOutTime == null) {
+                        if (currentTime < shiftEndTime) {
+                            errorMessage = "현재는 근무시간입니다"
+                        } else {
+                            errorMessage = null
+                            currentAction = "clockout"
+                            navController.navigate(Screen.AttendanceScreen.QR.route + "?action=clockout")
+                        }
+                    } else {
+                        errorMessage = "이미 퇴근 기록이 있습니다"
+                    }
+                },
+                modifier = Modifier.padding(top = 16.dp)
+            ) {
+                Text(text = "퇴근 QR 코드 스캔")
             }
         }
     }
 }
+
 fun getShiftStartTime(): Long {
     // 근무시간 09:00을 밀리초로 변환하여 반환
     val calendar = Calendar.getInstance()
@@ -139,4 +158,56 @@ fun getShiftEndTime(): Long {
     calendar.set(Calendar.MINUTE, 0)
     calendar.set(Calendar.SECOND, 0)
     return calendar.timeInMillis
+}
+
+private val client = OkHttpClient()
+private val url = "http://192.168.45.240:8080/attendance"
+
+@Composable
+fun MyApp() {
+    var responseText by remember { mutableStateOf("Response will be shown here") }
+
+    Column(modifier = Modifier.padding(16.dp)) {
+        Button(onClick = { sendPostRequest { response -> responseText = response } }) {
+            Text(text = "Send POST Request")
+        }
+        Text(text = responseText, modifier = Modifier.padding(top = 16.dp))
+    }
+}
+
+private fun sendPostRequest(onResult: (String) -> Unit) {
+    val json = """
+        {
+          "employeeId": "sdh queen",
+          "date": "2024-08-09",
+          "checkInTime": "09:00:00",
+          "checkOutTime": "17:00:00",
+          "status": "Present"
+        }
+    """.trimIndent()
+
+    val body = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+
+    val request = Request.Builder()
+        .url(url)
+        .post(body)
+        .build()
+
+    client.newCall(request).enqueue(object : okhttp3.Callback {
+        override fun onFailure(call: okhttp3.Call, e: IOException) {
+            e.printStackTrace()
+            onResult("Failed to send request: ${e.message}")
+        }
+
+        override fun onResponse(call: okhttp3.Call, response: Response) {
+            response.use {
+                if (it.isSuccessful) {
+                    val responseData = it.body?.string()
+                    onResult(responseData ?: "No response from server")
+                } else {
+                    onResult("Request failed with code: ${it.code}")
+                }
+            }
+        }
+    })
 }

@@ -76,4 +76,12 @@ dependencies {
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
     implementation(libs.barcode.scanning)
+
+    // ktor Gradle
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.serialization.kotlinx.json)
+
+    // okhttp Gradle
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }
