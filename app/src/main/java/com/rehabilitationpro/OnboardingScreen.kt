@@ -1,27 +1,21 @@
 package com.rehabilitationpro
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.rehabilitationpro.ui.theme.ColorPalette
+import com.rehabilitationpro.widgets.GoToSignInScreenButton
+import com.rehabilitationpro.widgets.GoToSignUpScreenButton
 
 @Composable
 fun OnboardingScreen(navController: NavHostController) {
@@ -40,32 +34,11 @@ fun OnboardingScreen(navController: NavHostController) {
             contentDescription = null,
         )
 
-        // Sign In Button (로그인 버튼)
-        Button(
-            onClick = { navController.navigate(Screen.AuthScreen.Login.route) },
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .height(56.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = ColorPalette.signInBlue
-            ),
-        ) {
-            Text(text = "Sign In", color = Color.White, fontSize = 20.sp)
-        }
-
+        // Sign In Screen 전환 Button (로그인 버튼)
+        GoToSignInScreenButton(onClick = { navController.navigate(Screen.SignIn.route) })
         Spacer(modifier = Modifier.height(16.dp))
-        // Sign Up Button (회원 가입 버튼)
-        Button(
-            onClick = { navController.navigate(Screen.AuthScreen.SignUp.route) },
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .height(56.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent
-            ),
-            border = BorderStroke(1.dp, ColorPalette.signInBlue),
-        ) {
-            Text(text = "Sign Up", color = ColorPalette.signInBlue, fontSize = 20.sp)
-        }
+
+        // Sign Up Screen 전환 Button (회원 가입 버튼)
+        GoToSignUpScreenButton(onClick = { navController.navigate(Screen.SignUp.route) })
     }
 }

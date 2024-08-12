@@ -54,7 +54,7 @@ fun AccountCreationScreen(navController: NavHostController) {
                 title = { Text("Login") },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Screen.AuthScreen.Login.route)
+                        navController.navigate(Screen.SignIn.route)
                     }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
@@ -126,8 +126,8 @@ fun AccountCreationScreen(navController: NavHostController) {
                     println("Position: $selectedPosition")
 
                     // Proceed with account creation logic
-                    navController.navigate(Screen.AuthScreen.Login.route) {
-                        popUpTo(Screen.AuthScreen.SignUp.route) { inclusive = true }
+                    navController.navigate(Screen.SignIn.route) {
+                        popUpTo(Screen.SignUp.route) { inclusive = true }
                     }
                 }
             },

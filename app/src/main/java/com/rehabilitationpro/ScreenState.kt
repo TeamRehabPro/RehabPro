@@ -3,17 +3,10 @@ package com.rehabilitationpro
 
 sealed class Screen(val route: String, val title: String = "") {
     data object Onboarding : Screen("onboard", "첫 화면")
-
     data object SignIn : Screen("sign_in", "로그인")
+    data object SignUp : Screen("sign_up", "회원 가입")
 
 
-    // 1 : Authentication Screen
-    sealed class AuthScreen(route: String, title: String) : Screen(route, title) {
-        data object Login : AuthScreen("login", "로그인")
-        data object SignUp : AuthScreen("signup", "회원가입")
-    }
-
-    // 2 : Main menu
     data object MainMenu : Screen("menu", "메뉴")
 
     // 3 : Notice screens as a part of the Screen hierarchy
