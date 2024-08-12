@@ -38,7 +38,7 @@ fun UserRoleDropdown(
     val roles = listOf("Manager", "Employee")
 
     // 선택된 역할 유무에 따라 border 색상을 결정
-    val borderColor = if (selectedRole.value == null) ColorPalette.borderGray else ColorPalette.signInBlue
+    val borderColor = if (selectedRole.value == null) ColorPalette.borderGray else ColorPalette.primaryBlue
 
     ExposedDropdownMenuBox(
         expanded = expanded,

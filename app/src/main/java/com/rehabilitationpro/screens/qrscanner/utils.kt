@@ -1,5 +1,5 @@
 // utils.kt
-package com.rehabilitationpro.screens.menus.attendance
+package com.rehabilitationpro.screens.qrscanner
 
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient

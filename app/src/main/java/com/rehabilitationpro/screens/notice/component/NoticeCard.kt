@@ -1,4 +1,4 @@
-package com.rehabilitationpro.screens.menus.notice.component
+package com.rehabilitationpro.screens.notice.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rehabilitationpro.screens.menus.notice.Notice
+import com.rehabilitationpro.screens.notice.Notice
 
 @Composable
 fun NoticeCard(notice: Notice, onClick: () -> Unit) {

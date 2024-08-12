@@ -31,10 +31,11 @@ object ColorPalette {
     val myDarkBlue: Color = Color(0xFF160E6F)
     val myBlack: Color = Color(0xFF000000)
 
-    val signInBlue: Color = Color(50, 100, 219)
+    val primaryBlue: Color = Color(50, 100, 219)
     val borderGray: Color = Color(220, 221, 223)
     val inputBoxGray: Color = Color(247, 249, 250)
     val textGray: Color = Color(146, 145, 146)
+    val listBoxGray: Color = Color(245,245,255)
 
 }
 

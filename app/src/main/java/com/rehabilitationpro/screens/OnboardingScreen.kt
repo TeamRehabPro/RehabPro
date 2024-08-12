@@ -1,4 +1,4 @@
-package com.rehabilitationpro
+package com.rehabilitationpro.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -14,6 +14,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.rehabilitationpro.R
+import com.rehabilitationpro.Screen
 import com.rehabilitationpro.widgets.GoToSignInScreenButton
 import com.rehabilitationpro.widgets.GoToSignUpScreenButton
 

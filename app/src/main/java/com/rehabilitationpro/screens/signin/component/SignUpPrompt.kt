@@ -13,7 +13,7 @@ fun SignUpPrompt(onSignUpClick: () -> Unit) {
         Text(text = "Don't have an account?")
         Text(
             text = " Sign Up",
-            color = ColorPalette.signInBlue,
+            color = ColorPalette.primaryBlue,
             modifier = Modifier.clickable(onClick = onSignUpClick)
         )
     }

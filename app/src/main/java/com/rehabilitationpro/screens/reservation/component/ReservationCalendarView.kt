@@ -1,9 +1,8 @@
 // ReservationCalendarView.kt
-package com.rehabilitationpro.screens.menus.reservation.component
+package com.rehabilitationpro.screens.reservation.component
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures

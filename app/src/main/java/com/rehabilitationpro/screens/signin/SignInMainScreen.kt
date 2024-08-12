@@ -62,7 +62,7 @@ fun SignInScreen(navController: NavHostController) {
         // [4] 로그인 버튼
         val signInConditions = userEmail.value.isNotEmpty() && userPassword.value.isNotEmpty()
         SignInButton(
-            onClick = { navController.navigate(Screen.MainMenu.route) },
+            onClick = { navController.navigate(Screen.Home.route) },
             enableConditions = signInConditions
         )
         Spacer(modifier = Modifier.height(8.dp))

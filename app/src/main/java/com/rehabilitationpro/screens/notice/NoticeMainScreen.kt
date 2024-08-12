@@ -1,5 +1,5 @@
 // NoticeMainScreen.kt
-package com.rehabilitationpro.screens.menus.notice
+package com.rehabilitationpro.screens.notice
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -18,8 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.rehabilitationpro.Screen
-import com.rehabilitationpro.bar.TopBar
-import com.rehabilitationpro.screens.menus.notice.component.NoticeCard
+import com.rehabilitationpro.screens.notice.component.NoticeCard
 
 // Generate the ID based on the timestamp
 data class Notice(val title: String, val description: String, val timestamp: String) {
@@ -27,10 +25,9 @@ data class Notice(val title: String, val description: String, val timestamp: Str
 }
 
 @Composable
-fun NoticeMainScreen(navController: NavHostController, drawerState: DrawerState) {
-    Scaffold(
-        topBar = { TopBar(navController, drawerState) },
-    ) { innerPadding ->
+fun NoticeMainScreen(navController: NavHostController) {
+    Scaffold{
+        innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -53,7 +50,7 @@ fun NoticeMainScreen(navController: NavHostController, drawerState: DrawerState)
             ) {
                 items(notices) { notice ->
                     NoticeCard(notice) {
-                        navController.navigate(Screen.NoticeScreen.Detail.createRoute(notice.id))
+                        navController.navigate(Screen.NoticeDetail.createRoute(notice.id))
                     }
                 }
             }

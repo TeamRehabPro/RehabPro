@@ -1,4 +1,4 @@
-package com.rehabilitationpro.screens.menus.attendance
+package com.rehabilitationpro.screens.qrscanner
 
 import android.Manifest
 import android.content.Context
