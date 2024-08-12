@@ -40,7 +40,7 @@ fun TermsCheckbox(
             checked = isTermsChecked.value,
             onCheckedChange = { isTermsChecked.value = it },
             colors = CheckboxDefaults.colors(
-                checkedColor = ColorPalette.signInBlue,
+                checkedColor = ColorPalette.primaryBlue,
                 uncheckedColor = ColorPalette.textGray,
                 checkmarkColor = Color.White
             )
@@ -49,11 +49,11 @@ fun TermsCheckbox(
         Text(
             text = buildAnnotatedString {
                 append("I agree to the healthcare ")
-                withStyle(style = SpanStyle(color = ColorPalette.signInBlue)) {
+                withStyle(style = SpanStyle(color = ColorPalette.primaryBlue)) {
                     append("Terms of Service")
                 }
                 append(" and ")
-                withStyle(style = SpanStyle(color = ColorPalette.signInBlue)) {
+                withStyle(style = SpanStyle(color = ColorPalette.primaryBlue)) {
                     append("Privacy Policy")
                 }
             },

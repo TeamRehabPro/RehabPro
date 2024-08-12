@@ -87,7 +87,7 @@ fun CustomInputField(
     isPassword: Boolean = false,
     @SuppressLint("ModifierParameter") modifier: Modifier = Modifier
 ) {
-    val borderColor = if (fieldValue.value.isEmpty()) ColorPalette.borderGray else ColorPalette.signInBlue
+    val borderColor = if (fieldValue.value.isEmpty()) ColorPalette.borderGray else ColorPalette.primaryBlue
 
     Surface(
         modifier = modifier

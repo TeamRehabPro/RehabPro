@@ -24,7 +24,7 @@ fun FindPasswordButton(modifier: Modifier = Modifier) {
         Text(
             text = "Forgot password?",
             fontWeight = FontWeight.W400,
-            color = ColorPalette.signInBlue
+            color = ColorPalette.primaryBlue
         )
     }
 }

@@ -87,7 +87,7 @@ fun CustomButton(
     modifier: Modifier = Modifier,
     filled: Boolean = true,
     contentColor: Color = Color.White,
-    containerColor: Color = ColorPalette.signInBlue,
+    containerColor: Color = ColorPalette.primaryBlue,
     isButtonEnabled: Boolean? = true,
 ) {
     val enabled = isButtonEnabled ?: true  // Default -> True
