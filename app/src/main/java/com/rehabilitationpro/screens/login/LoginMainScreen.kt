@@ -32,7 +32,6 @@ import com.rehabilitationpro.ui.theme.ColorPalette
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
-    val colors = ColorPalette()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -87,7 +86,7 @@ fun LoginScreen(navController: NavHostController) {
                 ),
                 modifier = Modifier.padding(8.dp)
             ) {
-                Text(text = "Login", color = colors.mySkyBlue, fontSize = 20.sp)
+                Text(text = "Login", color = ColorPalette.mySkyBlue, fontSize = 20.sp)
             }
 
             // Account Creation Button
@@ -101,7 +100,7 @@ fun LoginScreen(navController: NavHostController) {
                 ),
                 modifier = Modifier.padding(8.dp)
             ) {
-                Text(text = "Sign Up", color = colors.mySkyBlue, fontSize = 20.sp)
+                Text(text = "Sign Up", color = ColorPalette.mySkyBlue, fontSize = 20.sp)
             }
         }
     }

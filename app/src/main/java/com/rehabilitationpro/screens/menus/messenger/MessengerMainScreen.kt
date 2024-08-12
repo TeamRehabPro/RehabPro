@@ -12,15 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.rehabilitationpro.Screen
 import com.rehabilitationpro.bar.TopBar
 
 @Composable
 fun MessengerMainScreen(navController: NavHostController, drawerState: DrawerState) {
-    val currentRoute = Screen.MessengerScreen.Main.route
-
     Scaffold(
-        topBar = { TopBar(navController, drawerState, currentRoute) },
+        topBar = { TopBar(navController, drawerState) },
     ) { innerPadding ->
         Column(
             modifier = Modifier
