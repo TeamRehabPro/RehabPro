@@ -17,12 +17,29 @@ import com.rehabilitationpro.ui.theme.ColorPalette
 fun SignInButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enableConditions: Boolean = false
 ) {
     CustomButton(
         text = "Sign In",
         onClick = onClick,
         modifier = modifier,
         filled = true,
+        isButtonEnabled = enableConditions
+    )
+}
+
+@Composable
+fun SignUpButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enableConditions: Boolean = false
+) {
+    CustomButton(
+        text = "Sign Up",
+        onClick = onClick,
+        modifier = modifier,
+        filled = true,
+        isButtonEnabled = enableConditions
     )
 }
 
@@ -61,6 +78,7 @@ fun GoToSignUpScreenButton(
  * @param filled Determines if the button should be filled or outlined. True for filled, false for outlined.
  * @param contentColor The color of the button's content (text). Default is White.
  * @param containerColor The background color of the button. Default is ColorPalette.signInBlue.
+ * @param isButtonEnabled Determines if the button is enabled. If null, defaults to true (enabled).
  */
 @Composable
 fun CustomButton(
@@ -70,17 +88,31 @@ fun CustomButton(
     filled: Boolean = true,
     contentColor: Color = Color.White,
     containerColor: Color = ColorPalette.signInBlue,
+    isButtonEnabled: Boolean? = true,
 ) {
+    val enabled = isButtonEnabled ?: true  // Default -> True
+
     Button(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth(0.8f)
             .height(56.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (filled) containerColor else Color.Transparent,
-            contentColor = if (filled) contentColor else containerColor,
+            containerColor = if (enabled) {
+                if (filled) containerColor else Color.Transparent
+            } else {
+                ColorPalette.inputBoxGray
+            },
+            contentColor = if (enabled) {
+                if (filled) contentColor else containerColor
+            } else {
+                Color.White
+            },
+            disabledContainerColor = ColorPalette.inputBoxGray,  // Disabled -> Button Color
+            disabledContentColor = ColorPalette.textGray         // Disabled -> Button Text Color
         ),
-        border = if (!filled) BorderStroke(1.dp, containerColor) else null
+        border = if (!filled && enabled) BorderStroke(1.dp, containerColor) else BorderStroke(1.dp, ColorPalette.borderGray),
+        enabled = enabled  // 버튼을 활성화/비활성화
     ) {
         Text(
             text = text,

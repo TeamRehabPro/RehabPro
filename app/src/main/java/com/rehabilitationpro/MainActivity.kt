@@ -15,9 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.rehabilitationpro.sidenavigation.SideNavigation
 import com.rehabilitationpro.screens.MainMenu
-import com.rehabilitationpro.screens.signin.SignInScreen
 import com.rehabilitationpro.screens.menus.attendance.AttendanceMainScreen
 import com.rehabilitationpro.screens.menus.attendance.QRScannerScreen
 import com.rehabilitationpro.screens.menus.dashboard.DashboardMainScreen
@@ -27,7 +25,9 @@ import com.rehabilitationpro.screens.menus.notice.NoticeMainScreen
 import com.rehabilitationpro.screens.menus.notice.notices
 import com.rehabilitationpro.screens.menus.reservation.ReservationMainScreen
 import com.rehabilitationpro.screens.menus.schedule.ScheduleMainScreen
-import com.rehabilitationpro.screens.signup.AccountCreationScreen
+import com.rehabilitationpro.screens.signin.SignInScreen
+import com.rehabilitationpro.screens.signup.SignUpScreen
+import com.rehabilitationpro.sidenavigation.SideNavigation
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 
 class MainActivity : ComponentActivity() {
@@ -58,7 +58,7 @@ fun AppNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(navController = navController, startDestination = Screen.Onboarding.route) {
         composable(Screen.Onboarding.route) { OnboardingScreen(navController) }
         composable(Screen.SignIn.route) { SignInScreen(navController) }
-        composable(Screen.SignUp.route) { AccountCreationScreen(navController) }
+        composable(Screen.SignUp.route) { SignUpScreen(navController) }
 
         // Main menu and general screens
         composable(Screen.MainMenu.route) { MainMenu(navController, drawerState) }

@@ -26,7 +26,20 @@ fun SignInScreenHeader(
     CustomScreenHeader(
         title = "Sign In",
         onLeftIconClick = onBackClick,
-        leftIconResId = R.drawable.back_arrow,
+        leftIconResId = R.drawable.icon_back_arrow,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun SignUpScreenHeader(
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CustomScreenHeader(
+        title = "Sign Up",
+        onLeftIconClick = onBackClick,
+        leftIconResId = R.drawable.icon_back_arrow,
         modifier = modifier
     )
 }

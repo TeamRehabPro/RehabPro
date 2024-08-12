@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rehabilitationpro.R
 import com.rehabilitationpro.ui.theme.ColorPalette
@@ -76,7 +77,7 @@ fun CustomSignInBox(
         Icon(
             painter = painterResource(id = iconResId),
             contentDescription = null,
-            tint = Color.Unspecified,  // SVG 파일의 원래 색상을 유지하기 위해 Unspecified로 설정
+            tint = Color.Unspecified,  // SVG 파일의 원래 색상을 유지하기 위해 Unspecified 로 설정
             modifier = Modifier
                 .size(24.dp)
                 .padding(start = 4.dp)
@@ -84,7 +85,8 @@ fun CustomSignInBox(
         Spacer(modifier = Modifier.width(16.dp))
         Text(
             text = text,
-            color = ColorPalette.textGray,
+            fontWeight = FontWeight.Bold,
+            color = ColorPalette.myBlack,
             modifier = Modifier.weight(1f)
         )
     }
