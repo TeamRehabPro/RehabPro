@@ -55,7 +55,9 @@ fun AppContent(navController: NavHostController, drawerState: DrawerState) {
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavHost(navController: NavHostController, drawerState: DrawerState) {
-    NavHost(navController = navController, startDestination = Screen.AuthScreen.Login.route) {
+    NavHost(navController = navController, startDestination = Screen.Onboarding.route) {
+        composable(Screen.Onboarding.route) { OnboardingScreen(navController) }
+
         // Authentication-related screens
         composable(Screen.AuthScreen.Login.route) { LoginScreen(navController) }
         composable(Screen.AuthScreen.SignUp.route) { AccountCreationScreen(navController) }

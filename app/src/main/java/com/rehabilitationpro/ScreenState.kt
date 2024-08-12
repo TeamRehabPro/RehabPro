@@ -2,6 +2,11 @@
 package com.rehabilitationpro
 
 sealed class Screen(val route: String, val title: String = "") {
+    data object Onboarding : Screen("onboard", "첫 화면")
+
+    data object SignIn : Screen("sign_in", "로그인")
+
+
     // 1 : Authentication Screen
     sealed class AuthScreen(route: String, title: String) : Screen(route, title) {
         data object Login : AuthScreen("login", "로그인")

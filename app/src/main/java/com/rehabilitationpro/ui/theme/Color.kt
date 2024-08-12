@@ -30,6 +30,8 @@ object ColorPalette {
     val myBlue: Color = Color(0xFF403BBD)
     val myDarkBlue: Color = Color(0xFF160E6F)
     val myBlack: Color = Color(0xFF000000)
+
+    val signInBlue: Color = Color(0xFF3264DB)
 }
 
 //// Usage example
