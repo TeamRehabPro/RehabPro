@@ -12,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.rehabilitationpro.screens.OnboardingScreen
+import com.rehabilitationpro.screens.splash.OnboardingScreen
 import com.rehabilitationpro.screens.qrscanner.AttendanceMainScreen
 import com.rehabilitationpro.screens.qrscanner.QRScannerScreen
 import com.rehabilitationpro.screens.home.HomeScreen

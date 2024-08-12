@@ -39,7 +39,7 @@ fun SignUpScreen(navController: NavHostController) {
     ) {
         // [1] '뒤로 가기' 버튼을 포함한 회원 가입 스크린 헤드
         SignUpScreenHeader(onBackClick = { navController.navigate(Screen.Onboarding.route) })
-        Spacer(modifier = Modifier.height(64.dp))
+        Spacer(modifier = Modifier.height(48.dp))
 
         // [2] 회원 가입 (등록을 위한 필드 입력)
         val userName = remember { mutableStateOf("") }
@@ -61,7 +61,7 @@ fun SignUpScreen(navController: NavHostController) {
         val isTermsChecked = remember { mutableStateOf(false) }
         TermsCheckbox(isTermsChecked = isTermsChecked)
 
-        // [4] 회원 가입 버튼, 아래 5개의 필드가 채워지면 버튼이 활성화 됨.
+        // [4] 회원 가입 버튼, 아래 5개의 필드가 채워지면 버튼 활성화
         val signUpConditions =
                 userName.value.isNotEmpty() &&
                 userEmail.value.isNotEmpty() &&
