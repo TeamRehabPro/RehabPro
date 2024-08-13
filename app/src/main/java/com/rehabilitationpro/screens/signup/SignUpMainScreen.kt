@@ -1,5 +1,7 @@
 package com.rehabilitationpro.screens.signup
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,9 +26,11 @@ import com.rehabilitationpro.ui.theme.RehabPROTheme
 import com.rehabilitationpro.widgets.EmailInputField
 import com.rehabilitationpro.widgets.NameInputField
 import com.rehabilitationpro.widgets.PasswordInputField
+import com.rehabilitationpro.widgets.PhoneNumberInputField
 import com.rehabilitationpro.widgets.SignUpButton
 import com.rehabilitationpro.widgets.SignUpScreenHeader
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SignUpScreen(navController: NavHostController) {
     Column(
@@ -46,12 +50,16 @@ fun SignUpScreen(navController: NavHostController) {
         NameInputField(fieldValue = userName)
         Spacer(modifier = Modifier.height(16.dp))
 
-        val userEmail = remember { mutableStateOf("") }
-        EmailInputField(fieldValue = userEmail)
+        val userId = remember { mutableStateOf("") }
+        EmailInputField(fieldValue = userId)
         Spacer(modifier = Modifier.height(16.dp))
 
         val userPassword = remember { mutableStateOf("") }
         PasswordInputField(fieldValue = userPassword)
+        Spacer(modifier = Modifier.height(16.dp))
+
+        val userPhoneNumber = remember { mutableStateOf("") }
+        PhoneNumberInputField(fieldValue = userPhoneNumber)
         Spacer(modifier = Modifier.height(16.dp))
 
         val selectedRole = remember { mutableStateOf<String?>(null) }
@@ -61,20 +69,20 @@ fun SignUpScreen(navController: NavHostController) {
         val isTermsChecked = remember { mutableStateOf(false) }
         TermsCheckbox(isTermsChecked = isTermsChecked)
 
-        // [4] 회원 가입 버튼, 아래 5개의 필드가 채워지면 버튼 활성화
-        val signUpConditions =
-                userName.value.isNotEmpty() &&
-                userEmail.value.isNotEmpty() &&
-                userPassword.value.isNotEmpty() &&
-                selectedRole.value != null &&
-                isTermsChecked.value
+        // [4] 회원 가입 버튼
         SignUpButton(
-            onClick = { navController.navigate(Screen.SignIn.route) },
-            enableConditions = signUpConditions
+            navController = navController,
+            userName = userName,
+            userId = userId,
+            userPassword = userPassword,
+            userPhoneNumber = userPhoneNumber,
+            selectedRole = selectedRole,
+            isTermsChecked = isTermsChecked
         )
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun SignUpScreenPreview() {
