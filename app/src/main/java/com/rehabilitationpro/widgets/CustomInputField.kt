@@ -48,6 +48,51 @@ fun NameInputField(
 }
 
 @Composable
+fun RoleInputFieldFalse(
+    fieldValue: MutableState<String>,
+    modifier: Modifier = Modifier
+) {
+    CustomInputFieldWithLabelFalse(
+        fieldValue = fieldValue,
+        placeholder = "Role",
+        iconResId = R.drawable.baseline_shopping_bag_24,
+        modifier = modifier,
+        labelText = "Role",
+        isMandatory = true
+    )
+}
+
+@Composable
+fun DateOfBirthInputField(
+    fieldValue: MutableState<String>,
+    modifier: Modifier = Modifier
+) {
+    CustomInputFieldWithLabel(
+        fieldValue = fieldValue,
+        placeholder = "Enter your DOB",
+        iconResId = R.drawable.icon_calendar,
+        modifier = modifier,
+        labelText = "Date of Birth",
+        isMandatory = true
+    )
+}
+
+@Composable
+fun AddressInputField(
+    fieldValue: MutableState<String>,
+    modifier: Modifier = Modifier
+) {
+    CustomInputFieldWithLabel(
+        fieldValue = fieldValue,
+        placeholder = "Enter your address",
+        iconResId = R.drawable.icon_google,
+        modifier = modifier,
+        labelText = "Address",
+        isMandatory = true
+    )
+}
+
+@Composable
 fun EmailInputField(
     fieldValue: MutableState<String>,
     modifier: Modifier = Modifier
@@ -183,3 +228,84 @@ fun CustomInputFieldWithLabel(
         }
     }
 }
+
+@Composable
+fun CustomInputFieldWithLabelFalse(
+    fieldValue: MutableState<String>,
+    placeholder: String,
+    iconResId: Int,
+    isPassword: Boolean = false,
+    labelText: String,
+    isMandatory: Boolean = false,
+    @SuppressLint("ModifierParameter") modifier: Modifier = Modifier
+) {
+    val borderColor = if (fieldValue.value.isEmpty()) ColorPalette.borderGray else ColorPalette.primaryBlue
+
+    Column(
+        modifier = modifier.fillMaxWidth(0.8f)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(bottom = 4.dp)
+        ) {
+            if (isMandatory) {
+                Text(
+                    text = "* ",
+                    color = Color.Red,
+                    style = TextStyle(fontSize = 16.sp)
+                )
+            }
+            Text(
+                text = labelText,
+                color = Color.Black,
+                style = TextStyle(fontSize = 12.sp),
+                modifier = Modifier.padding(start = 2.dp)
+            )
+        }
+
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = RoundedCornerShape(12.dp),
+            color = ColorPalette.inputBoxGray,
+            border = BorderStroke(1.dp, borderColor)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = iconResId),
+                    contentDescription = null,
+                    tint = ColorPalette.textGray,
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                BasicTextField(
+                    value = fieldValue.value,
+                    onValueChange = {
+                        fieldValue.value = it
+                    },
+                    textStyle = TextStyle(color = Color.Black),
+                    decorationBox = { innerTextField ->
+                        Box {
+                            if (fieldValue.value.isEmpty()) {
+                                Text(
+                                    text = placeholder,
+                                    color = ColorPalette.textGray
+                                )
+                            }
+                            innerTextField()
+                        }
+                    },
+                    visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+                    keyboardOptions = if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
+                )
+            }
+        }
+    }
+}
+
