@@ -36,28 +36,29 @@ object HttpClient {
             }
         })
     }
-}
 
-fun sendEmployeeRegistration(
-    employeeId: String,
-    employeeName: String,
-    employeePassword: String,
-    position: String,
-    employeePhoneNumber: String,
-    joiningDate: String,
-    onResult: (Result<String>) -> Unit
-) {
-    val url = "http://192.168.45.240:8080/employees"
-    val jsonData = """
-        {
-          "employeeId": "$employeeId",
-          "employeeName": "$employeeName",
-          "employeePassword": "$employeePassword",
-          "position": "$position",
-          "employeePhoneNumber": "$employeePhoneNumber",
-          "joiningDate": "$joiningDate"
-        }
-    """.trimIndent()
+    fun sendGetRequest(url: String, onResult: (Result<String>) -> Unit) {
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
 
-    HttpClient.sendPostRequest(url, jsonData, onResult)
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                e.printStackTrace()
+                onResult(Result.failure(e))
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: Response) {
+                response.use {
+                    if (it.isSuccessful) {
+                        val responseData = it.body?.string()
+                        onResult(Result.success(responseData ?: "No response from server"))
+                    } else {
+                        onResult(Result.failure(IOException("Request failed with code: ${it.code}")))
+                    }
+                }
+            }
+        })
+    }
 }
