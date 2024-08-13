@@ -57,6 +57,19 @@ fun SignUpScreenHeader(
     )
 }
 
+@Composable
+fun EditProfileScreenHeader(
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CustomScreenHeader(
+        title = "Edit Profile",
+        onLeftIconClick = onBackClick,
+        leftIconResId = R.drawable.icon_back_arrow,
+        modifier = modifier
+    )
+}
+
 /**
  * A customizable screen header component with optional left and right icons, and a title.
  *
