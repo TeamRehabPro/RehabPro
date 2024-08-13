@@ -18,13 +18,13 @@ import androidx.compose.ui.unit.dp
 import com.rehabilitationpro.R
 
 @Composable
-fun MyProfile() {
+fun HomeScreenHeader() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.doctor),
+            painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = null,
             modifier = Modifier
                 .size(64.dp)
