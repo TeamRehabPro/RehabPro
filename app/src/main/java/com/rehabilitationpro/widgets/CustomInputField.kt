@@ -78,6 +78,22 @@ fun PasswordInputField(
     )
 }
 
+@Composable
+fun PhoneNumberInputField(
+    fieldValue: MutableState<String>,
+    modifier: Modifier = Modifier
+) {
+    CustomInputFieldWithLabel(
+        fieldValue = fieldValue,
+        placeholder = "Enter your phone number",
+        iconResId = R.drawable.icon_phone,
+        isPassword = false,
+        modifier = modifier,
+        labelText = "Phone Number",
+        isMandatory = true
+    )
+}
+
 /**
  * A customizable input field component for text input.
  *
