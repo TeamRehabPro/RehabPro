@@ -19,6 +19,19 @@ import androidx.compose.ui.unit.sp
 import com.rehabilitationpro.R
 
 @Composable
+fun SettingScreenHeader(
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CustomScreenHeader(
+        title = "Profile Setting",
+        onLeftIconClick = onBackClick,
+        leftIconResId = R.drawable.icon_back_arrow,
+        modifier = modifier
+    )
+}
+
+@Composable
 fun SignInScreenHeader(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
