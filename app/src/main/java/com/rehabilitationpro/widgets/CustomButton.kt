@@ -35,19 +35,23 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun SignInButton(
     onClick: () -> Unit,
+    userId: MutableState<String>,
+    userPassword: MutableState<String>,
     modifier: Modifier = Modifier,
-    enableConditions: Boolean = false
-) {
+    ) {
+    val signInConditions =
+        userId.value.isNotEmpty() &&
+                userPassword.value.isNotEmpty()
     CustomButton(
         text = "Sign In",
         onClick = onClick,
         modifier = modifier,
         filled = true,
-        isButtonEnabled = enableConditions
+        // 2개의 필드(Id, Password)가 채워지면 버튼 활성화
+        isButtonEnabled = signInConditions,
     )
 }
 
-// 5개의 필드(Name, Id, Password, Tole, Term Check)가 채워지면 버튼 활성화
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SignUpButton(
@@ -60,13 +64,13 @@ fun SignUpButton(
     isTermsChecked: MutableState<Boolean>,
     modifier: Modifier = Modifier
 ) {
+
     val signUpConditions =
         userName.value.isNotEmpty() &&
                 userId.value.isNotEmpty() &&
                 userPassword.value.isNotEmpty() &&
                 selectedRole.value != null &&
                 isTermsChecked.value
-
     CustomButton(
         text = "Sign Up",
         onClick = {
@@ -98,7 +102,8 @@ fun SignUpButton(
         },
         modifier = modifier,
         filled = true,
-        isButtonEnabled = signUpConditions
+        // 5개의 필드(Name, Id, Password, Tole, Term Check)가 채워지면 버튼 활성화
+        isButtonEnabled = signUpConditions,
     )
 }@Composable
 fun GoToSignInScreenButton(

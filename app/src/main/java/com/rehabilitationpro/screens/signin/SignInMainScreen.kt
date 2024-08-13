@@ -46,8 +46,8 @@ fun SignInScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(64.dp))
 
         // [2] 로그인 용 이메일 / 비밀 번호 입력 필드
-        val userEmail = remember { mutableStateOf("") }
-        EmailInputField(fieldValue = userEmail)
+        val userId = remember { mutableStateOf("") }
+        EmailInputField(fieldValue = userId)
         Spacer(modifier = Modifier.height(16.dp))
 
         val userPassword = remember { mutableStateOf("") }
@@ -60,10 +60,10 @@ fun SignInScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(48.dp))
 
         // [4] 로그인 버튼
-        val signInConditions = userEmail.value.isNotEmpty() && userPassword.value.isNotEmpty()
         SignInButton(
             onClick = { navController.navigate(Screen.Home.route) },
-            enableConditions = signInConditions
+            userId = userId,
+            userPassword = userPassword,
         )
         Spacer(modifier = Modifier.height(8.dp))
 
