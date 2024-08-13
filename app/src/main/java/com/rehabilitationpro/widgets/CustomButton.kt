@@ -1,14 +1,22 @@
 package com.rehabilitationpro.widgets
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rehabilitationpro.ui.theme.ColorPalette
@@ -69,6 +77,19 @@ fun GoToSignUpScreenButton(
     )
 }
 
+@Composable
+fun ProfileEditButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    CustomButton(
+        text = "Edit Profile",
+        onClick = onClick,
+        modifier = modifier,
+        filled = true,
+    )
+}
+
 /**
  * A composable function that creates a custom button.
  *
@@ -79,6 +100,7 @@ fun GoToSignUpScreenButton(
  * @param contentColor The color of the button's content (text). Default is White.
  * @param containerColor The background color of the button. Default is ColorPalette.signInBlue.
  * @param isButtonEnabled Determines if the button is enabled. If null, defaults to true (enabled).
+ * @param iconResId R.drawable.id
  */
 @Composable
 fun CustomButton(
@@ -89,6 +111,7 @@ fun CustomButton(
     contentColor: Color = Color.White,
     containerColor: Color = ColorPalette.primaryBlue,
     isButtonEnabled: Boolean? = true,
+    iconResId: Int? = null
 ) {
     val enabled = isButtonEnabled ?: true  // Default -> True
 
@@ -108,15 +131,29 @@ fun CustomButton(
             } else {
                 Color.White
             },
-            disabledContainerColor = ColorPalette.inputBoxGray,  // Disabled -> Button Color
-            disabledContentColor = ColorPalette.textGray         // Disabled -> Button Text Color
+            disabledContainerColor = ColorPalette.inputBoxGray,
+            disabledContentColor = ColorPalette.textGray
         ),
         border = if (!filled && enabled) BorderStroke(1.dp, containerColor) else BorderStroke(1.dp, ColorPalette.borderGray),
-        enabled = enabled  // 버튼을 활성화/비활성화
+        enabled = enabled
     ) {
-        Text(
-            text = text,
-            fontSize = 20.sp,
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (iconResId != null) {
+                Image(
+                    painter = painterResource(id = iconResId),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+            Text(
+                text = text,
+                fontSize = 20.sp,
+            )
+        }
     }
 }

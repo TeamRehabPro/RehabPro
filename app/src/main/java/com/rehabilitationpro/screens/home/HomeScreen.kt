@@ -25,7 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.rehabilitationpro.screens.home.component.AttendanceSection
 import com.rehabilitationpro.screens.home.component.DayInfo
 import com.rehabilitationpro.screens.home.component.MenuNavigation
-import com.rehabilitationpro.screens.home.component.MyProfile
+import com.rehabilitationpro.screens.home.component.HomeScreenHeader
 import com.rehabilitationpro.screens.home.component.SmallCalendarWidgetSection
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 
@@ -41,7 +41,7 @@ fun HomeScreen(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // [1] 프로필 + 상단 제목
-        MyProfile()
+        HomeScreenHeader()
         Spacer(modifier = Modifier.height(32.dp))
 
         // [2] 출/퇴근 QR 위젯
