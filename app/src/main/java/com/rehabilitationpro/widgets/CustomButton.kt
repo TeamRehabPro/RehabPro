@@ -1,5 +1,7 @@
 package com.rehabilitationpro.widgets
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,13 +15,22 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.rehabilitationpro.Screen
+import com.rehabilitationpro.network.sendEmployeeRegistration
 import com.rehabilitationpro.ui.theme.ColorPalette
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun SignInButton(
@@ -36,22 +47,60 @@ fun SignInButton(
     )
 }
 
+// 5개의 필드(Name, Id, Password, Tole, Term Check)가 채워지면 버튼 활성화
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SignUpButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enableConditions: Boolean = false
+    navController: NavController,
+    userName: MutableState<String>,
+    userId: MutableState<String>,
+    userPassword: MutableState<String>,
+    userPhoneNumber: MutableState<String>,
+    selectedRole: MutableState<String?>,
+    isTermsChecked: MutableState<Boolean>,
+    modifier: Modifier = Modifier
 ) {
+    val signUpConditions =
+        userName.value.isNotEmpty() &&
+                userId.value.isNotEmpty() &&
+                userPassword.value.isNotEmpty() &&
+                selectedRole.value != null &&
+                isTermsChecked.value
+
     CustomButton(
         text = "Sign Up",
-        onClick = onClick,
+        onClick = {
+            if (signUpConditions) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    sendEmployeeRegistration(
+                        employeeName = userName.value,
+                        employeeId = userId.value,
+                        employeePassword = userPassword.value,
+                        employeePhoneNumber = userPhoneNumber.value,
+                        position = selectedRole.value ?: "",
+                        joiningDate = currentDate
+                    ) { result ->
+                        result.fold(
+                            onSuccess = { responseData ->
+                                println("Registration successful: $responseData")
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    navController.navigate(Screen.SignIn.route)
+                                }
+                            },
+                            onFailure = { error ->
+                                println("Registration failed: ${error.message}")
+                            }
+                        )
+                    }
+                }
+            }
+        },
         modifier = modifier,
         filled = true,
-        isButtonEnabled = enableConditions
+        isButtonEnabled = signUpConditions
     )
-}
-
-@Composable
+}@Composable
 fun GoToSignInScreenButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
