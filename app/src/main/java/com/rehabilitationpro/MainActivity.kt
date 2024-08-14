@@ -13,7 +13,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rehabilitationpro.screens.home.HomeScreen
 import com.rehabilitationpro.screens.notice.NoticeMainScreen
-import com.rehabilitationpro.screens.qrscanner.AttendanceMainScreen
 import com.rehabilitationpro.screens.qrscanner.QRScannerScreen
 import com.rehabilitationpro.screens.reservation.ReservationMainScreen
 import com.rehabilitationpro.screens.schedule.ScheduleMainScreen
@@ -51,7 +50,6 @@ fun AppNavHost(navController: NavHostController) {
 
         // Use Notice sealed class for notice screens
         composable(Screen.NoticeHome.route) { NoticeMainScreen(navController) }
-        composable(Screen.Attendance.route) { AttendanceMainScreen(navController) }
         composable(Screen.Reservation.route) { ReservationMainScreen(navController) }
         composable(Screen.Schedule.route) { ScheduleMainScreen(navController) }
     }
