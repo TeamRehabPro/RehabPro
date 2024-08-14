@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.rehabilitationpro.R
 import com.rehabilitationpro.screens.notice.Notice
 import com.rehabilitationpro.ui.theme.ColorPalette
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -117,6 +118,13 @@ fun NoticeCard(notice: Notice) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun formatDate(timestamp: String): String {
-    val dateTime = LocalDateTime.parse(timestamp, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-    return dateTime.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+    return try {
+        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        val date = LocalDate.parse(timestamp, inputFormatter)
+        date.format(outputFormatter)
+    } catch (e: Exception) {
+        // 파싱에 실패한 경우 원본 문자열을 반환
+        timestamp
+    }
 }
