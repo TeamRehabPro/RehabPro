@@ -11,11 +11,6 @@ sealed class Screen(val route: String, val title: String = "") {
     data object Profile : Screen("profile")
 
     data object NoticeHome : Screen("notice_home")
-    data object NoticeDetail : Screen("notice_detail/{id}") {
-        fun createRoute(id: String): String {
-            return "notice_detail/$id"
-        }
-    }
     data object Attendance : Screen("attendance")
     data object Reservation : Screen("reservation")
     data object Schedule : Screen("schedule")
