@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,15 +18,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.rehabilitationpro.Screen
-import com.rehabilitationpro.widgets.EditProfileScreenHeader
-import com.rehabilitationpro.widgets.NameInputField
 import androidx.navigation.compose.rememberNavController
+import com.rehabilitationpro.Screen
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 import com.rehabilitationpro.widgets.AddressInputField
 import com.rehabilitationpro.widgets.DateOfBirthInputField
+import com.rehabilitationpro.widgets.EditProfileScreenHeader
+import com.rehabilitationpro.widgets.NameInputField
 import com.rehabilitationpro.widgets.RoleInputFieldFalse
-import com.rehabilitationpro.widgets.SignUpScreenHeader
 
 
 @Composable
@@ -40,7 +38,7 @@ fun EditProfileScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        EditProfileScreenHeader(onBackClick = { navController.navigate(Screen.Profile.route) })
+        EditProfileScreenHeader(onBackClick = { navController.navigate(Screen.Setting.route) })
         Spacer(modifier = Modifier.height(48.dp))
 
         val userName = remember { mutableStateOf("냉냉면") }

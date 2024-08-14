@@ -19,6 +19,20 @@ import androidx.compose.ui.unit.sp
 import com.rehabilitationpro.R
 
 @Composable
+fun ScheduleScreenHeader(
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CustomScreenHeader(
+        title = "My Diary",
+        onLeftIconClick = onBackClick,
+        leftIconResId = R.drawable.icon_back_arrow,
+        rightIconResId = R.drawable.icon_add_calendar,
+        modifier = modifier
+    )
+}
+
+@Composable
 fun SettingScreenHeader(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
