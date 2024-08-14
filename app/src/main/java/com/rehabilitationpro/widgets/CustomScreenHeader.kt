@@ -19,6 +19,19 @@ import androidx.compose.ui.unit.sp
 import com.rehabilitationpro.R
 
 @Composable
+fun NoticeScreenHeader(
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CustomScreenHeader(
+        title = "Notice",
+        onLeftIconClick = onBackClick,
+        leftIconResId = R.drawable.icon_back_arrow,
+        modifier = modifier
+    )
+}
+
+@Composable
 fun ScheduleScreenHeader(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier

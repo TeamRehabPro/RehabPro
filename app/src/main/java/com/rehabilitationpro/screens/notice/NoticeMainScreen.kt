@@ -1,6 +1,9 @@
-// NoticeMainScreen.kt
 package com.rehabilitationpro.screens.notice
 
+import NoticeCard
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,54 +11,47 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.rehabilitationpro.Screen
-import com.rehabilitationpro.screens.notice.component.NoticeCard
+import com.rehabilitationpro.ui.theme.RehabPROTheme
+import com.rehabilitationpro.widgets.NoticeScreenHeader
 
-// Generate the ID based on the timestamp
-data class Notice(val title: String, val description: String, val timestamp: String) {
-    val id: String get() = timestamp.replace("[-: ]".toRegex(), "")
-}
-
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NoticeMainScreen(navController: NavHostController) {
-    Scaffold{
-        innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Notice Screen",
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(8.dp)
-            )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .background(Color.White),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        NoticeScreenHeader(onBackClick = { navController.navigate(Screen.Home.route) })
 
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(top = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(notices) { notice ->
-                    NoticeCard(notice) {
-                        navController.navigate(Screen.NoticeDetail.createRoute(notice.id))
-                    }
-                }
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(top = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(notices) { notice ->
+                NoticeCard(notice = notice)
             }
         }
     }
+}
+
+data class Notice(val title: String, val description: String, val timestamp: String) {
+    val id: String get() = timestamp.replace("[-: ]".toRegex(), "")
 }
 
 val notices = listOf(
@@ -70,3 +66,11 @@ val notices = listOf(
     Notice("Notice 9", "Description for Notice 9", "2024-07-29 13:35"),
     Notice("Notice 10", "Description for Notice 10", "2024-07-28 08:50"),
 )
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Preview(showBackground = true)
+@Composable
+fun NoticeMainScreenPreview() {
+    val navController = rememberNavController()
+    RehabPROTheme { NoticeMainScreen(navController = navController) }
+}
