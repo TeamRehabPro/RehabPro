@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.rehabilitationpro.Screen
-import com.rehabilitationpro.screens.schedule.component.CalendarComponent_1
+import com.rehabilitationpro.screens.schedule.component.CalendarComponent_2
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 import com.rehabilitationpro.widgets.ScheduleScreenHeader
 
@@ -34,8 +34,8 @@ fun ScheduleMainScreen(navHostController: NavHostController) {
     ) {
         ScheduleScreenHeader(onBackClick = { navHostController.navigate(Screen.Home.route) })
         HorizontalDivider()
-        CalendarComponent_1()
-//        CalendarComponent_2()
+//        CalendarComponent_1()
+        CalendarComponent_2()
     }
 }
 

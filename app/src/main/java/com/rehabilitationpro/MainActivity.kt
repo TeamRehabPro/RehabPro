@@ -11,11 +11,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.rehabilitationpro.screens.home.HomeScreen
-import com.rehabilitationpro.screens.notice.NoticeDetailScreen
 import com.rehabilitationpro.screens.notice.NoticeMainScreen
-import com.rehabilitationpro.screens.notice.notices
 import com.rehabilitationpro.screens.qrscanner.AttendanceMainScreen
 import com.rehabilitationpro.screens.qrscanner.QRScannerScreen
 import com.rehabilitationpro.screens.reservation.ReservationMainScreen
@@ -54,28 +51,6 @@ fun AppNavHost(navController: NavHostController) {
 
         // Use Notice sealed class for notice screens
         composable(Screen.NoticeHome.route) { NoticeMainScreen(navController) }
-        composable(
-            route = Screen.NoticeDetail.route,
-            arguments = listOf(
-                navArgument("id") { type = androidx.navigation.NavType.StringType }
-            )
-        ) { backStackEntry ->
-            val id = backStackEntry.arguments?.getString("id") ?: "No ID"
-
-            // Find the notice with the given ID
-            val notice = notices.find { it.id == id }
-
-            // Pass arguments to NoticeDetailScreen
-            notice?.let {
-                NoticeDetailScreen(
-                    navController = navController,
-                    title = notice.title,
-                    timestamp = notice.timestamp,
-                    description = notice.description
-                )
-            }
-        }
-
         composable(Screen.Attendance.route) { AttendanceMainScreen(navController) }
         composable(Screen.Reservation.route) { ReservationMainScreen(navController) }
         composable(Screen.Schedule.route) { ScheduleMainScreen(navController) }

@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.rehabilitationpro.network.fetchReservationData
+import com.rehabilitationpro.network.getReservationData
 import com.rehabilitationpro.screens.home.component.AttendanceSection
 import com.rehabilitationpro.screens.home.component.DayInfo
 import com.rehabilitationpro.screens.home.component.HomeScreenHeader
@@ -81,7 +81,7 @@ fun HomeScreen(navController: NavHostController) {
                     selectedDay?.let { date ->
                         coroutineScope.launch {
                             isLoading = true
-                            fetchReservationData(userId, date) { result ->
+                            getReservationData(userId, date) { result ->
                                 isLoading = false
                                 result.fold(
                                     onSuccess = { data ->
