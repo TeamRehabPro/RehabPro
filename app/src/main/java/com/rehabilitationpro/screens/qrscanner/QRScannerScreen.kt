@@ -42,6 +42,7 @@ import com.google.mlkit.vision.common.InputImage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.Executors
@@ -205,4 +206,22 @@ fun processImageProxy(
         }
         .addOnFailureListener { it.printStackTrace() }
         .addOnCompleteListener { imageProxy.close() }
+}
+
+// 출근 시간 09:00:00 로 지정
+fun getShiftStartTime(): Long {
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.HOUR_OF_DAY, 9)
+    calendar.set(Calendar.MINUTE, 0)
+    calendar.set(Calendar.SECOND, 0)
+    return calendar.timeInMillis
+}
+
+// 퇴근 시간 18:00:00 로 지정
+fun getShiftEndTime(): Long {
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.HOUR_OF_DAY, 18)
+    calendar.set(Calendar.MINUTE, 0)
+    calendar.set(Calendar.SECOND, 0)
+    return calendar.timeInMillis
 }

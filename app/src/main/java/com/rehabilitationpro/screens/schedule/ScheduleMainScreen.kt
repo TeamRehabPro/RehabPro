@@ -5,7 +5,9 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
@@ -17,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.rehabilitationpro.Screen
-import com.rehabilitationpro.screens.schedule.component.CalendarComponent_2
+import com.rehabilitationpro.screens.schedule.component.CalendarComponent
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 import com.rehabilitationpro.widgets.ScheduleScreenHeader
 
@@ -33,9 +35,11 @@ fun ScheduleMainScreen(navHostController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ScheduleScreenHeader(onBackClick = { navHostController.navigate(Screen.Home.route) })
+        Spacer(modifier = Modifier.height(8.dp))
         HorizontalDivider()
-//        CalendarComponent_1()
-        CalendarComponent_2()
+        Spacer(modifier = Modifier.height(16.dp))
+        CalendarComponent()
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 

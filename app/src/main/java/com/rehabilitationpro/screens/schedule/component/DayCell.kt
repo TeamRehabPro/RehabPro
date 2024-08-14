@@ -91,9 +91,9 @@ fun DayCell(
                             .clip(CircleShape)
                             .background(
                                 color = when (eventType) {
-                                    EventType.VACATION -> Color.Red
-                                    EventType.SEMINAR -> Color.Blue
-                                    EventType.BUSINESS_TRIP -> Color.Green
+                                    EventType.Vacation -> Color.Red
+                                    EventType.Seminar -> Color.Blue
+                                    EventType.BusinessTrip -> Color.Green
                                 }
                             )
                     )
@@ -103,13 +103,11 @@ fun DayCell(
     }
 }
 
-enum class EventType { VACATION, SEMINAR, BUSINESS_TRIP }
-
 @RequiresApi(Build.VERSION_CODES.O)
 fun getEventsForDate(date: LocalDate): List<EventType> {
     val events = mutableListOf<EventType>()
-    if (date.dayOfMonth % 3 == 0) events.add(EventType.VACATION)
-    if (date.dayOfMonth % 5 == 0) events.add(EventType.SEMINAR)
-    if (date.dayOfMonth % 2 == 0) events.add(EventType.BUSINESS_TRIP)
+    if (date.dayOfMonth % 3 == 0) events.add(EventType.Vacation)
+    if (date.dayOfMonth % 5 == 0) events.add(EventType.Seminar)
+    if (date.dayOfMonth % 2 == 0) events.add(EventType.BusinessTrip)
     return events
 }
