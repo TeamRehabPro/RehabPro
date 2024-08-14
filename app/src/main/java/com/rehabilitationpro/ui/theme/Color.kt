@@ -22,11 +22,11 @@ object ColorPalette {
     val myGray800: Color = Color(0xFF1E293B)
     val myGray900: Color = Color(0xFF0F172A)
 
-    val myGray: Color = Color(0xFFBBBBBB)
+    val myGray: Color = Color(75,74,75)
     val myWhite: Color = Color(0xFFFFFFFF)
     val myPurple: Color = Color(0xFF692BE0)
     val myMint: Color = Color(0xFF5FD4C5)
-    val mySkyBlue: Color = Color(0xFF6380E5)
+    val mySkyBlue: Color = Color(52,148,228)
     val myBlue: Color = Color(0xFF403BBD)
     val myDarkBlue: Color = Color(0xFF160E6F)
     val myBlack: Color = Color(0xFF000000)
