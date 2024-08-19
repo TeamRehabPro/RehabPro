@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.rehabilitationpro.R
@@ -39,7 +38,7 @@ fun SettingScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // [1] 뒤로가기 버튼이 포함된 프로필 스크린 헤더
+        // [1] 뒤로 가기 버튼이 포함된 프로필 스크린 헤더
         SettingScreenHeader(onBackClick = { navController.navigate(Screen.Home.route) })
 
         // [2] 현재 프로필 및 수정 버튼
