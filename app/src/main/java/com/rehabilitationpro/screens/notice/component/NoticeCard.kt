@@ -38,7 +38,6 @@ import com.rehabilitationpro.R
 import com.rehabilitationpro.screens.notice.Notice
 import com.rehabilitationpro.ui.theme.ColorPalette
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)

@@ -144,6 +144,19 @@ fun ProfileEditButton(
     )
 }
 
+@Composable
+fun SettingChangeSaveButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    CustomButton(
+        text = "Save Changes",
+        onClick = onClick,
+        modifier = modifier,
+        filled = true
+    )
+}
+
 /**
  * A composable function that creates a custom button.
  *
