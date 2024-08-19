@@ -17,11 +17,13 @@ import com.rehabilitationpro.screens.qrscanner.QRScannerScreen
 import com.rehabilitationpro.screens.reservation.ReservationMainScreen
 import com.rehabilitationpro.screens.schedule.ScheduleMainScreen
 import com.rehabilitationpro.screens.setting.EditProfileScreen
+import com.rehabilitationpro.screens.setting.ProfileViewModel
 import com.rehabilitationpro.screens.setting.SettingScreen
 import com.rehabilitationpro.screens.signin.SignInScreen
 import com.rehabilitationpro.screens.signup.SignUpScreen
 import com.rehabilitationpro.screens.splash.OnboardingScreen
 import com.rehabilitationpro.ui.theme.RehabPROTheme
+import androidx.lifecycle.viewmodel.compose.viewModel as viewModel
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -39,14 +41,15 @@ class MainActivity : ComponentActivity() {
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavHost(navController: NavHostController) {
+    val profileViewModel: ProfileViewModel = viewModel()
     NavHost(navController = navController, startDestination = Screen.Onboarding.route) {
         composable(Screen.Onboarding.route) { OnboardingScreen(navController) }
         composable(Screen.SignIn.route) { SignInScreen(navController) }
         composable(Screen.SignUp.route) { SignUpScreen(navController) }
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.QR.route) { QRScannerScreen(navController) }
-        composable(Screen.Setting.route) { SettingScreen(navController) }
-        composable(Screen.Profile.route) { EditProfileScreen(navController) }
+        composable(Screen.Setting.route) { SettingScreen(navController, profileViewModel) }
+        composable(Screen.Profile.route) { EditProfileScreen(navController, profileViewModel) }
 
         // Use Notice sealed class for notice screens
         composable(Screen.NoticeHome.route) { NoticeMainScreen(navController) }

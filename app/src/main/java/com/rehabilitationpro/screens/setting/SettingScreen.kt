@@ -15,12 +15,16 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.rehabilitationpro.R
@@ -30,9 +34,26 @@ import com.rehabilitationpro.ui.theme.ColorPalette
 import com.rehabilitationpro.ui.theme.RehabPROTheme
 import com.rehabilitationpro.widgets.ProfileEditButton
 import com.rehabilitationpro.widgets.SettingScreenHeader
+import kotlinx.coroutines.launch
+
+class ProfileViewModel : ViewModel() {
+    val userName = mutableStateOf("냉냉면")
+    val position = mutableStateOf("Manager")
+    val dateOfBirth = mutableStateOf("1970-01-01")
+    val address = mutableStateOf("Unknown")
+
+    fun updateProfile(newName: String, newPosition: String, newDateOfBirth: String, newAddress: String) {
+        viewModelScope.launch {
+            userName.value = newName
+            position.value = newPosition
+            dateOfBirth.value = newDateOfBirth
+            address.value = newAddress
+        }
+    }
+}
 
 @Composable
-fun SettingScreen(navController: NavHostController) {
+fun SettingScreen(navController: NavHostController, profileViewModel: ProfileViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,7 +74,9 @@ fun SettingScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(24.dp))
 
         // [3] 프로필 상세 정보
-        ProfileInformation()
+//        ProfileInformation()
+        val profileViewModel: ProfileViewModel = viewModel()
+        ProfileInformation(profileViewModel)
 
         //
         ProfileEditButton(onClick = { navController.navigate(Screen.Profile.route) })
@@ -131,9 +154,39 @@ fun ProfileLine(iconResId: Int, describe: String, content: String) {
     Spacer(modifier = Modifier.height(8.dp))
 }
 
-@Preview(showBackground = true)
 @Composable
-fun SettingMainScreenPreview() {
-    val navController = rememberNavController()
-    RehabPROTheme { SettingScreen(navController = navController) }
+fun ProfileInformation(viewModel: ProfileViewModel) {
+    Column {
+        ProfileLine(
+            iconResId = R.drawable.baseline_person_24,
+            describe = "Name",
+            content = viewModel.userName.value
+        )
+        ProfileLine(
+            iconResId = R.drawable.baseline_shopping_bag_24,
+            describe = "Role",
+            content = viewModel.position.value
+        )
+        ProfileLine(
+            iconResId = R.drawable.baseline_calendar_month_24,
+            describe = "Date of Birth",
+            content = viewModel.dateOfBirth.value
+        )
+        ProfileLine(
+            iconResId = R.drawable.baseline_house_24,
+            describe = "Address",
+            content = viewModel.address.value
+        )
+    }
 }
+
+
+//@Preview(showBackground = true)
+//@Composable
+//fun SettingMainScreenPreview() {
+//    val navController = rememberNavController()
+//    RehabPROTheme { SettingScreen(
+//        navController = navController,
+//        profileViewModel = profileViewModel
+//    ) }
+//}
