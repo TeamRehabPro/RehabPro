@@ -85,7 +85,7 @@ fun UserRoleDropdown(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.icon_position),
+                    painter = painterResource(id = R.drawable.icon_key),
                     contentDescription = "User Role",
                     tint = ColorPalette.textGray,
                     modifier = Modifier

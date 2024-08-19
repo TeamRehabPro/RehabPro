@@ -28,7 +28,7 @@ import com.rehabilitationpro.ui.theme.ColorPalette
 @Composable
 fun SignInWithGoogle() {
     val context = LocalContext.current
-    CustomSignInBox(
+    CustomClickableBox(
         iconResId = R.drawable.icon_google,
         text = "Sign in with Google",
         onClick = { /*TODO : Social Login with Google*/
@@ -40,7 +40,7 @@ fun SignInWithGoogle() {
 @Composable
 fun SignInWithFacebook() {
     val context = LocalContext.current
-    CustomSignInBox(
+    CustomClickableBox(
         iconResId = R.drawable.icon_facebook,
         text = "Sign in with Facebook",
         onClick = { /*TODO : Social Login with Facebook*/
@@ -58,7 +58,7 @@ fun SignInWithFacebook() {
  * @param modifier A Modifier to be applied to the sign-up box. Default is Modifier.
  */
 @Composable
-fun CustomSignInBox(
+fun CustomClickableBox(
     iconResId: Int,
     text: String,
     onClick: () -> Unit,

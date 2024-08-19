@@ -75,7 +75,7 @@ fun SignInScreen(navController: NavHostController) {
         OrDivider()
         Spacer(modifier = Modifier.height(24.dp))
 
-        // [7] 소셜 로그인
+        // [7] 소셜 로그인 (아직 기능 미구현, 현재는 Toast Message 만 출력됨)
         SignInWithGoogle()
         Spacer(modifier = Modifier.height(16.dp))
         SignInWithFacebook()

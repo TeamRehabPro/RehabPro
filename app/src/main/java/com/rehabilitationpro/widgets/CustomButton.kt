@@ -39,9 +39,8 @@ fun SignInButton(
     userPassword: MutableState<String>,
     modifier: Modifier = Modifier,
     ) {
-    val signInConditions =
-        userId.value.isNotEmpty() &&
-                userPassword.value.isNotEmpty()
+    val signInConditions = listOf(userId.value, userPassword.value).all { it.isNotEmpty() }
+
     CustomButton(
         text = "Sign In",
         onClick = onClick,
@@ -105,31 +104,8 @@ fun SignUpButton(
         // 5개의 필드(Name, Id, Password, Tole, Term Check)가 채워지면 버튼 활성화
         isButtonEnabled = signUpConditions,
     )
-}@Composable
-fun GoToSignInScreenButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    CustomButton(
-        text = "Sign In",
-        onClick = onClick,
-        modifier = modifier,
-        filled = true,
-    )
 }
 
-@Composable
-fun GoToSignUpScreenButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    CustomButton(
-        text = "Sign Up",
-        onClick = onClick,
-        modifier = modifier,
-        filled = false,
-    )
-}
 
 @Composable
 fun ProfileEditButton(

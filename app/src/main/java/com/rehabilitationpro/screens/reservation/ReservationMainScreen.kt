@@ -1,4 +1,3 @@
-// ReservationMainScreen.kt
 package com.rehabilitationpro.screens.reservation
 
 import android.os.Build
