@@ -1,4 +1,3 @@
-// HomeScreen.kt
 package com.rehabilitationpro.screens.home
 
 import android.os.Build
@@ -30,12 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.rehabilitationpro.network.getReservationData
 import com.rehabilitationpro.screens.home.component.AttendanceSection
-import com.rehabilitationpro.screens.home.component.AttendanceViewModel
 import com.rehabilitationpro.screens.home.component.DayInfo
 import com.rehabilitationpro.screens.home.component.HomeScreenHeader
 import com.rehabilitationpro.screens.home.component.MenuNavigation
@@ -61,9 +58,7 @@ fun HomeScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(32.dp))
 
         // [2] 출/퇴근 QR 위젯
-//        AttendanceSection(navController = navController)
-        val attendanceViewModel: AttendanceViewModel = viewModel()
-        AttendanceSection(navController = navController, viewModel = attendanceViewModel)
+        AttendanceSection(navController = navController)
 
         // [3] Menu
         MenuNavigation(navController = navController)

@@ -39,6 +39,5 @@ object ColorPalette {
 
 }
 
-//// Usage example
-//val colors = ColorPalette()
-//val primaryColor = colors.Purple
+// Usage Example
+// color = ColorPalette.primaryBlue

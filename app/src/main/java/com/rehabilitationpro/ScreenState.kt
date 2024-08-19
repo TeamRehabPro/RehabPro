@@ -1,4 +1,3 @@
-// ScreenState.kt
 package com.rehabilitationpro
 
 sealed class Screen(val route: String) {

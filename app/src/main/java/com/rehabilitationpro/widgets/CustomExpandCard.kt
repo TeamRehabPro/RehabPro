@@ -125,7 +125,6 @@ fun CustomExpandCard(
     }
 }
 
-// Usage example:
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NoticeCard(notice: Notice) {
@@ -138,10 +137,5 @@ fun NoticeCard(notice: Notice) {
                 style = MaterialTheme.typography.bodyMedium.copy(color = Color.Black)
             )
         }
-        // You can customize colors here if needed:
-        // backgroundColor = Color.LightGray,
-        // borderColor = Color.Blue,
-        // titleTextColor = Color.DarkGray
     )
 }
-
